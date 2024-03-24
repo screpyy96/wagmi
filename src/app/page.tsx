@@ -12,7 +12,7 @@ export default function Home() {
 
   useEffect(() => {
     if (!isConnected) {
-      open()
+      console.log("ooen")
     } else {
       console.log(address)
     }
