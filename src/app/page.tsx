@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react';
 import Connect from '@/components/Connect';
 import { useWeb3Modal } from "@web3modal/wagmi/react";
 import { useAccount } from "wagmi";
-import SendTrans from '../components/SendTransaction';
+import SendTrans from '../components/sendTransaction';
 import { ethers } from "ethers";
 import {useWallet} from '../hooks/hooks'
 import usdcAbi from '../usdcAbi.json';
