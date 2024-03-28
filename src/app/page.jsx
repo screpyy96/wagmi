@@ -32,7 +32,8 @@ export default function Home() {
     return (
       <div>
         <Connect/>
-      <Balanta address={address}/>
+         <Balanta address={address}/>
+         
       </div>
     );
   };
