@@ -32,8 +32,6 @@ export default function Home() {
     return (
       <div>
         <Connect/>
-        {/* <Balance ethBalance={ethBalance} usdtBalance={usdtBalance} usdcBalance={usdcBalance} /> */}
-       {/* <SendTrans sendEth={sendEth} sendUsdt={sendUsdt} sendUsdc={sendUsdc} adresa={adresa} wallet={wallet}/> */}
       <Balanta address={address}/>
       </div>
     );
