@@ -2,7 +2,7 @@ import React from 'react';
 import SendPayment from "./SendPayment";
 import { useBalance } from 'wagmi';
 
-function Balanta({ address }) {
+const Balanta = ({ address }) => {
   // Adresa contractului USDT
   const usdtContractAddress = '0xdac17f958d2ee523a2206206994597c13d831ec7';
   // Adresa contractului USDC
@@ -25,17 +25,31 @@ function Balanta({ address }) {
     token: usdcContractAddress, 
   });
 
+  const formatBalance = (balance, currency) => {
+    if (currency === 'ETH') {
+      return balance ? parseFloat(balance?.data?.formatted).toFixed(3) : 'Loading...';
+    } else {
+      return balance ? parseFloat(balance?.data?.formatted).toFixed(2) : 'Loading...';
+    }
+  };
+
   return (
     <div>
-      <p>ETH Balance: {ethBalance.data ? ethBalance.data.formatted : 'Loading...'}</p>
-      <p>USDT Balance: {usdtBalance.data ? usdtBalance.data.formatted : 'Loading...'}</p>
-      <p>USDC Balance: {usdcBalance.data ? usdcBalance.data.formatted : 'Loading...'}</p>
+      <div>
       <SendPayment 
         address={address} 
         ethBalance={ethBalance}
         usdtBalance={usdtBalance}
         usdcBalance={usdcBalance}
-      />
+        />
+        <div style={{borderLeft: "2px solid black"}}> 
+                  <p>ETH Balance: {formatBalance(ethBalance, 'ETH')}</p>
+         <p>USDT Balance: {formatBalance(usdtBalance, 'USDT')}</p>
+         <p>USDC Balance: {formatBalance(usdcBalance, 'USDC')}</p>
+
+         </div>
+        
+      </div>
     </div>
   );
 }

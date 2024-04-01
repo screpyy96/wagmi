@@ -4,6 +4,7 @@ import { cookieToInitialState } from 'wagmi'
 import { headers } from 'next/headers'
 import ContextProvider from '@/context'
 import { config } from '@/config'
+import "../global.css"
 
 
 export const metadata: Metadata = {
