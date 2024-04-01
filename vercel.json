@@ -1,9 +1,7 @@
 {
     "version": 2,
     "build": {
-      "env": {
-        "npm_config_frozen_lockfile": "false"
-      }
+      "frozen-lockfile": false
     }
   }
   
