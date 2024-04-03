@@ -12,11 +12,9 @@ import {
   MobileMenuIcon,
   MobileMenuBackground,
   MobileMenuItem,
-//   WaveBackground
 } from "./Navbar.styled";
 import Connect from '@/components/Connect';
 
-const logoImg = "https://media.discordapp.net/attachments/908446871037571075/1224453811620413530/explora.png?ex=661d8c79&is=660b1779&hm=6ff38bcf8f67a1b795a7511f4d90a06890b928526fc15b3e43c0f87c77fd0ad9&=&format=webp&quality=lossless&width=936&height=936"
 const Navbar = () => {
   const [menuIcon, setMenuIcon] = useState(false);
 
@@ -27,11 +25,10 @@ const Navbar = () => {
   return (
     <Header>
       <div>
-      {/* <WaveBackground /> */}
         <Nav>
           <div>
             <Link href="/" passHref>
-              <Logo src={logoImg} alt="logo"/>
+              <Logo src="../../../logoop.png" alt="logo"/>
             </Link>
           </div>
 
@@ -42,8 +39,18 @@ const Navbar = () => {
               </Link>
             </MenuItem>
             <MenuItem>
+              <Link href="https://iosifs-organization.gitbook.io/explora/" target="blank" passHref>
+                Whitepaper
+              </Link>
+            </MenuItem>
+            <MenuItem>
               <Link href="/pages/stacking" passHref>
                 Staking
+              </Link>
+            </MenuItem>
+            <MenuItem>
+              <Link href="/pages/roadmap" passHref>
+                Roadmap
               </Link>
             </MenuItem>
             <MenuItem>

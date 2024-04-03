@@ -43,7 +43,7 @@ background: linear-gradient(90deg, #ff5733 33%, #33aaff 66%, #244e0ade 120%);
 
 max-width: 100%;
 
-height: 100px;
+height: 80px;
 display: flex;
 justify-content: space-between;
 align-items: center;
@@ -54,14 +54,13 @@ padding: 1rem;
 
 // Stilurile pentru logo
 const Logo = styled.img`
-  height: 120px;
-  width: 120px;
+  height: 80px;
+  width: 60px;
   text-transform: uppercase;
   cursor: pointer;
   @media (max-width: 768px) {
-      margin-left: -10px;
-      height: 100px;
-      width: 100px;
+      height: 60px;
+      width: 50px;
   }
 `;
 
