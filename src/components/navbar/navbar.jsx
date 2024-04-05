@@ -90,7 +90,17 @@ const Navbar = () => {
               </MobileMenuItem>
               <MobileMenuItem onClick={handleSmallerScreensNavigation}>
                 <StyledLink href="/pages/stacking" passHref>
-                  Stacking
+                  Whitepaper
+                </StyledLink>
+              </MobileMenuItem>
+              <MobileMenuItem onClick={handleSmallerScreensNavigation}>
+                <StyledLink href="/pages/how-to-buy" passHref>
+                  Staking
+                </StyledLink>
+              </MobileMenuItem>
+              <MobileMenuItem onClick={handleSmallerScreensNavigation}>
+                <StyledLink href="/pages/how-to-buy" passHref>
+                  Roadmap
                 </StyledLink>
               </MobileMenuItem>
               <MobileMenuItem onClick={handleSmallerScreensNavigation}>

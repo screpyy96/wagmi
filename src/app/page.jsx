@@ -29,9 +29,9 @@ export default function Home() {
     return (
       <div>
 
-  <Navbar address={address}>
+  <Navbar address={address}/>
 
-</Navbar>
+
         
           
          <Balanta address={address}/>

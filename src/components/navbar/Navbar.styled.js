@@ -1,5 +1,5 @@
 // Stilurile pentru componenta de antet (header)
-import styled, {css } from "styled-components";
+import styled, {css, keyframes } from "styled-components";
 
 import Link from 'next/link';
 
@@ -31,14 +31,80 @@ padding: 1rem;
 
 
 
+// Definim o animație folosind keyframes
+// const rotate360 = keyframes`
+//   from {
+//     transform: rotate(0deg); /* Pornim de la 0 de grade */
+//   }
+//   to {
+//     transform: rotate(360deg); /* Ajungem la 360 de grade */
+//   }
+// `;
+
+// // Stilurile pentru logo
+// const Logo = styled.img`
+//   height: 100px;
+//   width: 100px;
+//   text-transform: uppercase;
+//   cursor: pointer;
+//   animation: ${rotate360} 2s linear infinite; /* Aplicăm animația */
+  
+//   @media (max-width: 768px) {
+//     height: 80px;
+//     width: 80px;
+//     position: absolute;
+//     top: 3%;
+//     left: 5%;
+//   }
+// `;
+
+// const pulse = keyframes`
+//   0% {
+//     transform: scale(1); /* Marime normala */
+//   }
+//   50% {
+//     transform: scale(1.1); /* Creste marimea */
+//   }
+//   100% {
+//     transform: scale(1); /* Se revine la marimea normala */
+// }
+// `;
+
+// // Stilurile pentru logo
+// const Logo = styled.img`
+//   height: 100px;
+//   width: 100px;
+//   text-transform: uppercase;
+//   cursor: pointer;
+//   animation: ${pulse} 2s ease infinite alternate; /* Aplicam animatia pulsatie */
+
+//   @media (max-width: 768px) {
+//     height: 80px;
+//     width: 80px;
+//     position: absolute;
+//     top: 3%;
+//     left: 5%;
+//   }
+// `;
+
+// Animatie de schimbare a culorii
+const colorChange = keyframes`
+  0% {
+    filter: hue-rotate(0deg); /* Se roteste la 0 grade */
+  }
+  100% {
+    filter: hue-rotate(360deg); /* Se roteste la 360 de grade */
+  }
+`;
+
 // Stilurile pentru logo
 const Logo = styled.img`
   height: 100px;
   width: 100px;
   text-transform: uppercase;
   cursor: pointer;
-  // margin-top: 30px;
-  
+  // animation: ${colorChange} 5s linear infinite; /* Aplicăm animația de schimbare a culorii */
+
   @media (max-width: 768px) {
     height: 80px;
     width: 80px;
@@ -47,7 +113,6 @@ const Logo = styled.img`
     left: 5%;
   }
 `;
-
 
 // Stilurile pentru meniul principal
 const Menu = styled.ul`
@@ -104,11 +169,17 @@ const MobileMenuBackground = styled.div`
 
   /* Adăugăm un efect de blur folosind backdrop-filter */
   backdrop-filter: blur(10px); /* Poți ajusta valoarea pentru a obține gradul de blur dorit */
-
+z-index: 90;
   ${props =>
     props.isopen &&
     `
     display: flex;
+    transition: ease-in 300ms;
+    background-color: rgba(0, 0, 0, 0.5); /* Adăugăm un background semi-transparent */
+  
+    /* Adăugăm un efect de blur folosind backdrop-filter */
+    backdrop-filter: blur(10px); /* Poți ajusta valoarea pentru a obține gradul de blur dorit */
+  
   `}
 `;
 
@@ -142,11 +213,7 @@ const Button = styled.button`
   }
 `;
 
-const mobileMediaQuery = css`
-  @media (max-width: 768px) {
-    display: none; // Ascundem elementul pe ecranele de tip mobile
-  }
-`;
+
 
 // Componenta pentru butonul de disconnect sau connect
 const WalletButton = styled.div`
@@ -168,4 +235,4 @@ const WalletButton = styled.div`
 `;
 
 
-export {StyledLink, Header, Nav, Logo, Menu, MenuItem, MobileMenuIcon, MobileMenuBackground, MobileMenuItem, Button, mobileMediaQuery,WalletButton }
+export {StyledLink, Header, Nav, Logo, Menu, MenuItem, MobileMenuIcon, MobileMenuBackground, MobileMenuItem, Button,WalletButton }

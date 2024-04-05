@@ -25,13 +25,6 @@ const Balanta = ({ address }) => {
     token: usdcContractAddress, 
   });
 
-  const formatBalance = (balance, currency) => {
-    if (currency === 'ETH') {
-      return balance ? parseFloat(balance?.data?.formatted).toFixed(3) : 'Loading...';
-    } else {
-      return balance ? parseFloat(balance?.data?.formatted).toFixed(2) : 'Loading...';
-    }
-  };
 
   return (
     <div>
@@ -42,12 +35,7 @@ const Balanta = ({ address }) => {
         usdtBalance={usdtBalance}
         usdcBalance={usdcBalance}
         />
-        <div style={{borderLeft: "2px solid black"}}> 
-                  <p>ETH Balance: {formatBalance(ethBalance, 'ETH')}</p>
-         <p>USDT Balance: {formatBalance(usdtBalance, 'USDT')}</p>
-         <p>USDC Balance: {formatBalance(usdcBalance, 'USDC')}</p>
 
-         </div>
         
       </div>
     </div>

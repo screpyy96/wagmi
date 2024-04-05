@@ -7,9 +7,10 @@ import { collection, addDoc, getDocs, query, where } from "firebase/firestore";
 
 import firestore from '../config/firebase'
 import ProgressBar from './ProgressBar'
-import { MainImg, Container, Modal, Button, InfoContainer, Input } from './Main.styled'
+import {ConnectModal, SelectCurrency, StyledText, Container, Modal, Button, InfoContainer, Input,SpanModal,Price } from './Main.styled'
+import Connect from './Connect';
 
-const SendPayment = ({ address, isConnected }) => {
+const SendPayment = ({ address, isConnected, ethBalance, usdtBalance, usdcBalance }) => {
   // const { writeContract } = useWriteContract();
   const receiverAddress = "0x95151cFb8538962C6405586C39596D4C3210c234";
 
@@ -141,37 +142,84 @@ const SendPayment = ({ address, isConnected }) => {
       // Calculăm procentul de completare
       const percentage = (totalCapitalRaised / targetAmount) * 100;
       setProgressPercentage(percentage);
+      console.log(percentage, "procent")
+      console.log(totalCapitalRaised, "capital")
     }
   }, [totalCapitalRaised]);
   
+  const formatBalance = (balance, currency) => {
+    if (currency === 'ETH') {
+      return balance ? parseFloat(balance?.data?.formatted).toFixed(3) : 'Loading...';
+    } else {
+      return balance ? parseFloat(balance?.data?.formatted).toFixed(2) : 'Loading...';
+    }
+  };
+
   return (
     <Container>
       <div>
-       
+      <StyledText>
+      <span className="title">Accelerating Progress with <br/>AI-Powered Knowledge Discovery</span><br/><br/><br/><br/>
+      In an increasingly connected world where information flows between us, AI is reshaping the progress and scientific discovery. 
+      Harness AI to transform knowledge into innovation. 
+      Embark on a voyage with <span className="highlight">Exploras</span>: let your data ignite the spark of revolutionary discoveries.
+    </StyledText>
       </div>
 
       <Modal>
+        <SpanModal>
+         <p className='title'>
+          
+          Phase 1 Price!  
+          </p> 
         <div style={{display: "flex"}}>
-          <Button onClick={() => setSelectedCurrency('ETH')}>ETH</Button>
-          <Button onClick={() => setSelectedCurrency('USDT')}>USDT</Button>
-          <Button onClick={() => setSelectedCurrency('USDC')}>USDC</Button>
+          <button style={{
+
+          cursor: 'pointer',
+          backgroundColor:  '#007bff',
+          color: '#fff',
+          fontWeight: 'bold',
+        }}>Buy with crypto</button> 
+          <button >Get free tokens</button>
         </div>
+        </SpanModal>
+        <ProgressBar progress={progressPercentage} />
+        <Price>
+        <p>Total Capital Raised: {totalCapitalRaised.toLocaleString('en-US', { maximumFractionDigits: 2 })} USD</p>
+          <p>Target: 200,000 USD</p>
+        </Price>
+        {/* Meniu dropdown pentru selectarea monedei */}
+        <SelectCurrency value={selectedCurrency} onChange={(e) => setSelectedCurrency(e.target.value)}>
+  <option value="ETH">Ethereum</option>
+  <option value="USDT">USDT</option>
+  <option value="USDC">USDC</option>
+  {/* Alte opțiuni pentru alte monede */}
+</SelectCurrency>
+
         <Input
           type="text"
           value={amount}
           onChange={(e) => setAmount(e.target.value)}
           placeholder={`Enter ${selectedCurrency ? selectedCurrency : 'Currency'} amount`}
         />
+<Input
+  type="text" // modificăm tipul inputului la "text" pentru a permite afișarea rezultatului funcției
+  placeholder={` ${calculatePrice()} `}
+/>
+
         <Button onClick={handleTransfer}>Buy with {selectedCurrency}</Button>
 
-        <InfoContainer>
           <p>You will buy {calculatePrice()} tokens</p>
-          <p>Total Capital Raised: {totalCapitalRaised.toLocaleString('en-US', { maximumFractionDigits: 2 })} USDT</p>
+        <InfoContainer>
 
           <p>Total Tokens Owned: {tokensOwned}</p>
-          <ProgressBar progress={progressPercentage} />
         </InfoContainer>
       </Modal>
+
+      
+          <p>{formatBalance(ethBalance, 'ETH')}</p>
+          <p>{formatBalance(usdtBalance, 'USDT')}</p>
+          <p>{formatBalance(usdcBalance, 'USDC')}</p>
 
     </Container>
   );
