@@ -1,49 +1,27 @@
 // Stilurile pentru componenta de antet (header)
-import styled, {css, keyframes } from "styled-components";
+import styled, {css } from "styled-components";
 
+import Link from 'next/link';
 
-// const waveAnimation = keyframes`
-//   0% {
-//     transform: translateX(-100%);
-//     opacity: 0.8;
-//     background-color: rgba(255, 255, 255, 0.5);
-//   }
-//   50% {
-//     transform: translateX(100%);
-//     opacity: 0.3;
-//     background-color: rgba(255, 255, 255, 0.2);
-//   }
-//   100% {
-//     transform: translateX(-100%);
-//     opacity: 0.8;
-//     background-color: linear-gradient(225deg, #ff6b6b, #3b5998);
-//   }
-// `;
+const StyledLink = styled(Link)`
+  text-decoration: none; /* Remove default underline */
+  color: #fff; /* Example color */
+  font-weight: 400; /* Example font weight */
+  font-size: 21px;
+`;
 
-// const WaveBackground = styled.div`
-//   position: absolute;
-//   top: 0;
-//   left: 0;
-//   width: 100%;
-//   height: 100%;
-//   background-color: linear-gradient(125deg, #ff6b6b, #3b5998); /* Culoarea wave */
-//   // animation: ${waveAnimation} 7s linear infinite; /* Animția wave */
-//   z-index: 1; /* Asigură poziționarea sub meniul de navigare */
-// `;
 
 const Header = styled.header`
-  color: #fff;
-  width: 100%;
-  transition: ease-in 400ms;
+  // color: #fff;
+  margin: 0 auto;
+  width: 89%;
 `;
 
 // Stilurile pentru meniul de navigare
 const Nav = styled.nav`
-background: linear-gradient(90deg, #ff5733 33%, #33aaff 66%, #244e0ade 120%);
-
 max-width: 100%;
 
-height: 80px;
+height: 150px;
 display: flex;
 justify-content: space-between;
 align-items: center;
@@ -52,23 +30,28 @@ padding: 1rem;
 `;
 
 
+
 // Stilurile pentru logo
 const Logo = styled.img`
-  height: 80px;
-  width: 60px;
+  height: 100px;
+  width: 100px;
   text-transform: uppercase;
   cursor: pointer;
+  // margin-top: 30px;
+  
   @media (max-width: 768px) {
-      height: 60px;
-      width: 50px;
+    height: 80px;
+    width: 80px;
+    position: absolute;
+    top: 3%;
+    left: 5%;
   }
 `;
+
 
 // Stilurile pentru meniul principal
 const Menu = styled.ul`
   display: block;
-  list-style-type: none;
-  color: white;
 
   @media (max-width: 768px) {
     display: block;
@@ -81,7 +64,6 @@ const MenuItem = styled.div`
   padding:1rem;
   cursor: pointer;
   display: inline-flex;
-  align-items: center;
   font-size: 20px;
   color: white;
 
@@ -94,6 +76,8 @@ const MenuItem = styled.div`
 // Stilurile pentru iconița de meniu mobil
 const MobileMenuIcon = styled.div`
   display: none;
+  color: #fff;
+  z-index: 99;
 
   @media (max-width: 768px) {
     display: flex;
@@ -106,7 +90,7 @@ const MobileMenuIcon = styled.div`
 const MobileMenuBackground = styled.div`
   display: none;
   position: absolute;
-  top: 100px;
+  // top: 100px;
   right: 0;
   bottom: 0;
   left: 0;
@@ -114,9 +98,12 @@ const MobileMenuBackground = styled.div`
   align-items: center;
   width: 100%;
   height: 100%;
-  background: linear-gradient(90deg, #ff5733 33%, #33aaff 66%, #244e0ade 120%);
-  color: #fff;
+  color: black;
   transition: ease-in 300ms;
+  background-color: rgba(0, 0, 0, 0.5); /* Adăugăm un background semi-transparent */
+
+  /* Adăugăm un efect de blur folosind backdrop-filter */
+  backdrop-filter: blur(10px); /* Poți ajusta valoarea pentru a obține gradul de blur dorit */
 
   ${props =>
     props.isopen &&
@@ -141,7 +128,6 @@ const MobileMenuItem = styled.li`
 
 // Stilurile pentru butonul "Get a Quote"
 const Button = styled.button`
-  background-color: #ceff00;
   color: #2c3e50;
   border: none;
   border-radius: 999px;
@@ -167,7 +153,7 @@ const WalletButton = styled.div`
   ${props => props.mobileHidden && mobileMediaQuery} // Aplicăm Media Query-ul dacă prop-ul mobileHidden este setat
 
   // Stiluri pentru buton
-  background-color: #ceff00;
+  // background-color: #ceff00;
   color: #2c3e50;
   border: none;
   border-radius: 999px;
@@ -177,10 +163,9 @@ const WalletButton = styled.div`
   cursor: pointer;
 
   &:hover {
-    background-color: #2c3e50;
     color: #ceff00;
   }
 `;
 
 
-export { Header, Nav, Logo, Menu, MenuItem, MobileMenuIcon, MobileMenuBackground, MobileMenuItem, Button, mobileMediaQuery,WalletButton }
+export {StyledLink, Header, Nav, Logo, Menu, MenuItem, MobileMenuIcon, MobileMenuBackground, MobileMenuItem, Button, mobileMediaQuery,WalletButton }

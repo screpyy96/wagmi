@@ -1,37 +1,33 @@
-"use client"
-
 import React, { useState, useEffect } from 'react';
 import { useWriteContract, useSendTransaction } from 'wagmi';
 import { parseEther } from "viem";
-import usdtAbi from "../usdtAbi.json";
-import usdcAbi from "../usdcAbi.json";
-import { collection, addDoc, getDocs } from "firebase/firestore";
+// import usdtAbi from "../usdtAbi.json";
+// import usdcAbi from "../usdcAbi.json";
+import { collection, addDoc, getDocs, query, where } from "firebase/firestore";
+
 import firestore from '../config/firebase'
+import ProgressBar from './ProgressBar'
+import { MainImg, Container, Modal, Button, InfoContainer, Input } from './Main.styled'
 
-const SendPayment = ({address}) => {
-    const { writeContract } = useWriteContract();
-    const usdtContractAddress = "0xdac17f958d2ee523a2206206994597c13d831ec7";
-    const usdcContractAddress = "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48";
-    const receiverAddress = "0x95151cFb8538962C6405586C39596D4C3210c234";
-  
-    const { sendTransaction } = useSendTransaction();
-    const [ethAmount, setEthAmount] = useState('');
-    const [usdtAmount, setUsdtAmount] = useState('');
-    const [usdcAmount, setUsdcAmount] = useState('');
-    const [ethPrice, setEthPrice] = useState(0);
-    const [totalTokensSold, setTotalTokensSold] = useState(0);
-    const [totalTokensPresale, setTotalTokensPresale] = useState(0);
-    const [totalSalesInDollars, setTotalSalesInDollars] = useState(0);
-    const [totalCapitalRaised, setTotalCapitalRaised] = useState(0);
+const SendPayment = ({ address, isConnected }) => {
+  // const { writeContract } = useWriteContract();
+  const receiverAddress = "0x95151cFb8538962C6405586C39596D4C3210c234";
 
-  
+  const { sendTransaction } = useSendTransaction();
+  const [amount, setAmount] = useState('');
+  const [selectedCurrency, setSelectedCurrency] = useState(null);
+  const [ethPrice, setEthPrice] = useState(0);
+
+  const [totalCapitalRaised, setTotalCapitalRaised] = useState(0);
+  const [tokensOwned, setTokensOwned] = useState(0);
+  const [progressPercentage, setProgressPercentage] = useState(0);
+
   useEffect(() => {
     const fetchEthPrice = async () => {
       try {
         const response = await fetch('https://min-api.cryptocompare.com/data/price?fsym=ETH&tsyms=USD');
         const data = await response.json();
         setEthPrice(data.USD);
-        console.log(data.USD, "cct")
       } catch (error) {
         console.error('Error fetching ETH price:', error);
       }
@@ -45,128 +41,141 @@ const SendPayment = ({address}) => {
       try {
         const salesCollection = collection(firestore, 'adrese');
         const salesSnapshot = await getDocs(salesCollection);
+        let totalCapital = 0;
+  
+        salesSnapshot.forEach((doc) => {
+          const saleData = doc.data();
+          let transactionAmount = parseFloat(saleData.suma);
+  
+          // Convertim sumele în USDT
+          if (saleData.moneda === 'ETH') {
+            transactionAmount *= ethPrice;
+          } else if (saleData.moneda === 'USDC') {
+            transactionAmount *= 0.008;
+          } else if (saleData.moneda === "USDT") {
+            transactionAmount *= 0.008;
+          }
+  
+          totalCapital += transactionAmount;
+        });
+  
+        setTotalCapitalRaised(totalCapital);
+      } catch (error) {
+        console.error('Error fetching total sales:', error);
+      }
+    };
+  
+    if (firestore && ethPrice) {
+      fetchTotalSales();
+    }
+  }, [firestore, ethPrice]);
+  
+  useEffect(() => {
+    const fetchUserSales = async () => {
+      try {
+        const salesCollection = collection(firestore, 'adrese');
+        const q = query(salesCollection, where("adresa", "==", address));
+        const salesSnapshot = await getDocs(q);
         let totalTokens = 0;
+  
         salesSnapshot.forEach((doc) => {
           const saleData = doc.data();
           totalTokens += parseFloat(saleData.tokenNumber);
         });
-        setTotalTokensSold(totalTokens);
   
-        // Calculăm suma totală adunată în dolari
-        const presalePricePerToken = 0.008; // Pretul unui token în dolari
-        const totalCapitalRaised = totalTokens * presalePricePerToken;
-        setTotalCapitalRaised(totalCapitalRaised);
+        setTokensOwned(totalTokens.toLocaleString('en-US', { maximumFractionDigits: 2 }));
       } catch (error) {
-        console.error('Error fetching total token sales:', error);
+        console.error('Error fetching user sales:', error);
       }
     };
   
-    if (firestore) {
-      fetchTotalSales();
+    if (firestore && address) {
+      fetchUserSales();
     }
-  }, [firestore]);
+  }, [firestore, address]);
   
-  const handleETHTransfer = async () => {
+
+  const handleTransfer = async () => {
     try {
+      let currencyAmount = amount;
+      if(selectedCurrency === 'ETH') {
+        currencyAmount = parseEther(amount);
+      } else {
+        currencyAmount = amount * 1e6; // Convert to USDT or USDC format
+      }
       await sendTransaction({
         to: receiverAddress,
-        value: parseEther(ethAmount),
+        value: currencyAmount,
       });
 
-      // Salvăm datele în Firebase
+      // Salvăm datele în Firebase, inclusiv tokenNumber-ul calculat
       await addDoc(collection(firestore, 'adrese'), {
         adresa: address,
         data: new Date(),
-        moneda: 'ETH',
-        suma: ethAmount,
-        tokenNumber: calculatePrice(ethAmount, 'ETH')
+        moneda: selectedCurrency,
+        suma: amount,
+        tokenNumber: calculatePrice() // Adăugăm tokenNumber-ul calculat aici
       });
     } catch (error) {
-      console.error("Error sending ETH:", error);
+      console.error("Error sending transaction:", error);
     }
   };
 
-  const handleUSDTTransfer = () => {
-    const amountString = (usdtAmount * 1000000).toString();
-
-    writeContract({
-      abi: usdtAbi,
-      address: receiverAddress,
-      functionName: 'transfer',
-      args: [
-        address,
-        amountString,
-      ],
-    });
-
-    // Salvăm datele în Firebase
-    addDoc(collection(firestore, 'adrese'), {
-      adresa: address,
-      data: new Date(),
-      moneda: 'USDT',
-      suma: usdtAmount,
-      tokenNumber: calculatePrice(usdtAmount, 'USDT')
-    });
-  };
-
-  const handleUSDCTransfer = () => {
-    writeContract({
-      abi: usdcAbi,
-      address: receiverAddress,
-      functionName: 'transfer',
-      args: [
-        address,
-        (parseFloat(usdcAmount) * 1e6).toString(),
-      ],
-    });
-
-    // Salvăm datele în Firebase
-    addDoc(collection(firestore, 'adrese'), {
-      adresa: address,
-      data: new Date(),
-      moneda: 'USDC',
-      suma: usdcAmount,
-      tokenNumber: calculatePrice(usdcAmount, 'USDC')
-    });
-  };
-
-  const calculatePrice = (amount, currency) => {
-    let totalTokens = 0;
-  
-    if (currency === 'ETH') {
+  const calculatePrice = () => {
+    if (selectedCurrency === 'ETH') {
       if (!ethPrice) return 'Price not available';
-      totalTokens = parseFloat(amount) / ethPrice; // Împarte suma investită la prețul per token (ETH)
+      const totalCoins = (amount * ethPrice) / 0.008;
+      return totalCoins.toFixed(2);
     } else {
-      totalTokens = parseFloat(amount) / 0.008; // Împarte suma investită la prețul per token (USDT, USDC)
+      const pricePerCoin = 0.008;
+      const totalCoins = amount / pricePerCoin;
+      return totalCoins.toFixed(2);
     }
-  
-    return totalTokens.toFixed(2); // Returnează numărul total de tokeni cu două zecimale
   };
-  
-  // Calculăm progresul în procente
-  const progressPercentage = (totalTokensSold / totalTokensPresale) * 100;
 
-  
-  console.log(ethPrice)
-return (
-    <div>
-     <input type="text" value={ethAmount} onChange={(e) => setEthAmount(e.target.value)} placeholder="Enter ETH amount" />
-      <button onClick={handleETHTransfer}>Transfer ETH</button>
-  
-      <input type="text" value={usdtAmount} onChange={(e) => setUsdtAmount(e.target.value)} placeholder="Enter USDT amount" />
-      <button onClick={handleUSDTTransfer}>Transfer USDT</button>
-  
-      <input type="text" value={usdcAmount} onChange={(e) => setUsdcAmount(e.target.value)} placeholder="Enter USDC amount" />
-      <button onClick={handleUSDCTransfer}>Transfer USDC</button> 
+  const targetAmount = 200000; 
+  useEffect(() => {
+    // Verificăm dacă totalCapitalRaised este disponibil
+    if (totalCapitalRaised !== 0) {
       
-      <div>
-        <p>Total Tokens Sold: {totalTokensSold }</p>
-        <p>Total Sales in Dollars: ${totalSalesInDollars.toFixed(2) * 0.008}</p>
-        <p>{progressPercentage}</p>
-      </div>
-    </div>
-  );
+      // Calculăm procentul de completare
+      const percentage = (totalCapitalRaised / targetAmount) * 100;
+      setProgressPercentage(percentage);
+    }
+  }, [totalCapitalRaised]);
   
+  return (
+    <Container>
+      <div>
+       
+      </div>
+
+      <Modal>
+        <div style={{display: "flex"}}>
+          <Button onClick={() => setSelectedCurrency('ETH')}>ETH</Button>
+          <Button onClick={() => setSelectedCurrency('USDT')}>USDT</Button>
+          <Button onClick={() => setSelectedCurrency('USDC')}>USDC</Button>
+        </div>
+        <Input
+          type="text"
+          value={amount}
+          onChange={(e) => setAmount(e.target.value)}
+          placeholder={`Enter ${selectedCurrency ? selectedCurrency : 'Currency'} amount`}
+        />
+        <Button onClick={handleTransfer}>Buy with {selectedCurrency}</Button>
+
+        <InfoContainer>
+          <p>You will buy {calculatePrice()} tokens</p>
+          <p>Total Capital Raised: {totalCapitalRaised.toLocaleString('en-US', { maximumFractionDigits: 2 })} USDT</p>
+
+          <p>Total Tokens Owned: {tokensOwned}</p>
+          <ProgressBar progress={progressPercentage} />
+        </InfoContainer>
+      </Modal>
+
+    </Container>
+  );
+
 };
 
 export default SendPayment;

@@ -3,3 +3,10 @@
     padding: 0;
     box-sizing: border-box;
 }
+
+body {
+    background-image: url("../public/background.jpeg"); /* Replace with the path to your image */
+    background-size: cover; /* Adjust as needed */
+    background-position: center; /* Adjust as needed */
+    background-repeat: no-repeat; /* Adjust as needed */
+}

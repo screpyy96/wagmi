@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import Link from "next/link";
 import { AiOutlineMenu, AiOutlineClose } from "react-icons/ai";
 import {
   Header,
@@ -12,6 +11,7 @@ import {
   MobileMenuIcon,
   MobileMenuBackground,
   MobileMenuItem,
+  StyledLink
 } from "./Navbar.styled";
 import Connect from '@/components/Connect';
 
@@ -26,37 +26,39 @@ const Navbar = () => {
     <Header>
       <div>
         <Nav>
-          <div>
-            <Link href="/" passHref>
-              <Logo src="../../../logoop.png" alt="logo"/>
-            </Link>
-          </div>
 
           <Menu>
             <MenuItem>
-              <Link href="/" passHref>
+              <StyledLink href="/" passHref>
                 Home
-              </Link>
+              </StyledLink>
             </MenuItem>
             <MenuItem>
-              <Link href="https://iosifs-organization.gitbook.io/explora/" target="blank" passHref>
+              <StyledLink href="https://iosifs-organization.gitbook.io/explora/" target="blank" passHref>
                 Whitepaper
-              </Link>
+              </StyledLink>
             </MenuItem>
             <MenuItem>
-              <Link href="/pages/stacking" passHref>
+              <StyledLink href="/pages/stacking" passHref>
                 Staking
-              </Link>
+              </StyledLink>
             </MenuItem>
+          </Menu>
+          <div>
+            <StyledLink href="/" passHref>
+              <Logo src="../../../white.svg" alt="logo"/>
+            </StyledLink>
+          </div>
+          <Menu>
             <MenuItem>
-              <Link href="/pages/roadmap" passHref>
+              <StyledLink href="/pages/roadmap" passHref>
                 Roadmap
-              </Link>
+              </StyledLink>
             </MenuItem>
             <MenuItem>
-              <Link href="/pages/how-to-buy" passHref>
+              <StyledLink href="/pages/how-to-buy" passHref>
                 How To Buy
-              </Link>
+              </StyledLink>
             </MenuItem>
             <MenuItem>
               <Connect/>
@@ -73,7 +75,7 @@ const Navbar = () => {
                   <AiOutlineClose size={25} />
             ) : (
                 <div>
-                  <AiOutlineMenu size={25} />
+                  <AiOutlineMenu size={25}  />
                 </div>
             )}
           </MobileMenuIcon>
@@ -82,19 +84,19 @@ const Navbar = () => {
             
             <Menu>
               <MobileMenuItem onClick={handleSmallerScreensNavigation}>
-                <Link href="/" passHref>
+                <StyledLink href="/" passHref>
                   Home
-                </Link>
+                </StyledLink>
               </MobileMenuItem>
               <MobileMenuItem onClick={handleSmallerScreensNavigation}>
-                <Link href="/pages/stacking" passHref>
+                <StyledLink href="/pages/stacking" passHref>
                   Stacking
-                </Link>
+                </StyledLink>
               </MobileMenuItem>
               <MobileMenuItem onClick={handleSmallerScreensNavigation}>
-                <Link href="/pages/how-to-buy" passHref>
+                <StyledLink href="/pages/how-to-buy" passHref>
                   How To Buy
-                </Link>
+                </StyledLink>
               </MobileMenuItem>
               <MobileMenuItem onClick={handleSmallerScreensNavigation}>
                 <Connect/>
