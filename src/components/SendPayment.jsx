@@ -7,8 +7,9 @@ import { collection, addDoc, getDocs, query, where } from "firebase/firestore";
 
 import firestore from '../config/firebase'
 import ProgressBar from './ProgressBar'
-import {ConnectModal, SelectCurrency, StyledText, Container, Modal, Button, InfoContainer, Input,SpanModal,Price } from './Main.styled'
+import {Option,BuyButton, GetTokensButton, ButtonContainer, SelectCurrency, StyledText, Container, Modal, Button, InfoContainer, Input,SpanModal,Price } from './Main.styled'
 import Connect from './Connect';
+import { Logo } from './navbar/Navbar.styled';
 
 const SendPayment = ({ address, isConnected, ethBalance, usdtBalance, usdcBalance }) => {
   // const { writeContract } = useWriteContract();
@@ -172,16 +173,10 @@ const SendPayment = ({ address, isConnected, ethBalance, usdtBalance, usdcBalanc
           
           Phase 1 Price!  
           </p> 
-        <div style={{display: "flex"}}>
-          <button style={{
-
-          cursor: 'pointer',
-          backgroundColor:  '#007bff',
-          color: '#fff',
-          fontWeight: 'bold',
-        }}>Buy with crypto</button> 
-          <button >Get free tokens</button>
-        </div>
+        <ButtonContainer>
+          <BuyButton>Buy with crypto</BuyButton>
+          <GetTokensButton>Get free tokens</GetTokensButton>
+        </ButtonContainer>
         </SpanModal>
         <ProgressBar progress={progressPercentage} />
         <Price>
@@ -190,23 +185,30 @@ const SendPayment = ({ address, isConnected, ethBalance, usdtBalance, usdcBalanc
         </Price>
         {/* Meniu dropdown pentru selectarea monedei */}
         <SelectCurrency value={selectedCurrency} onChange={(e) => setSelectedCurrency(e.target.value)}>
-  <option value="ETH">Ethereum</option>
-  <option value="USDT">USDT</option>
-  <option value="USDC">USDC</option>
-  {/* Alte opțiuni pentru alte monede */}
-</SelectCurrency>
-
+          <Option value="USDT" className="usdt">USDT</Option>
+          <Option value="ETH" className="eth">Ethereum</Option>
+          <Option value="USDC" className="usdc">USDC</Option>
+          {/* Alte opțiuni pentru alte monede */}
+      </SelectCurrency>
+ 
         <Input
           type="text"
           value={amount}
           onChange={(e) => setAmount(e.target.value)}
           placeholder={`Enter ${selectedCurrency ? selectedCurrency : 'Currency'} amount`}
         />
-<Input
-  type="text" // modificăm tipul inputului la "text" pentru a permite afișarea rezultatului funcției
-  placeholder={` ${calculatePrice()} `}
-/>
-
+  
+        <Input
+        type="text"
+        placeholder={`EXP: ${calculatePrice()} `}
+        style={{
+          backgroundImage: `url(../../../coin.svg)`,
+          backgroundSize: '30px',
+          backgroundRepeat: 'no-repeat',
+          backgroundPosition: 'left center',
+          paddingLeft: '40px'
+        }}
+      />
         <Button onClick={handleTransfer}>Buy with {selectedCurrency}</Button>
 
           <p>You will buy {calculatePrice()} tokens</p>

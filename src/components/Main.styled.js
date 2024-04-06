@@ -1,4 +1,7 @@
 import styled from 'styled-components';
+import ethIcon from '../../public/coin.svg';
+import usdtIcon from '../../public/coin.svg';
+import usdcIcon from '../../public/coin.svg';
 
 const Container = styled.div`
   display: grid;
@@ -42,18 +45,15 @@ const Modal = styled.div`
 `;
 
 const Button = styled.button`
-  width: 100%; /* Lățimea completă a butonului pe dispozitivele mobile */
-  padding: 10px;
   border: none;
   border-radius: 5px;
   background-color: #52B2A7; // green
   color: #fff;
   cursor: pointer;
   margin-bottom: 10px;
+  height: 50px;
+  width: 80%;
 
-  &:hover {
-    background-color: #0056b3;
-  }
 
   @media (max-width: 768px) {
     width: 100%; /* Ajustarea lățimii butonului pentru a ocupa întreaga lățime a ecranului */
@@ -66,10 +66,13 @@ const Input = styled.input`
   margin-bottom: 10px;
   border-radius: 5px;
   border: 1px solid #ddd;
-  color: #333;
-  background-color: rgba(255, 255, 255, 0.8); /* Background semi-transparent */
-  box-sizing: border-box; /* Asigurați-vă că padding-ul și border-ul nu adaugă la lățimea totală */
 
+  //   background-color: rgba(255, 255, 255, 0.8); /* Background semi-transparent */
+   background-color: #F16122; /* Background semi-transparent */
+  box-sizing: border-box; /* Asigurați-vă că padding-ul și border-ul nu adaugă la lățimea totală */
+  &::placeholder {
+    color: #fff; /* Culoarea dorită pentru placeholder */
+  }
   @media (max-width: 768px) {
     width: 100%; /* Ajustarea lățimii inputului pentru a ocupa întreaga lățime a ecranului */
   }
@@ -83,18 +86,12 @@ const SpanModal = styled.div`
   color: #fff;
 
   & button {
-    width: 100%; /* Lățimea completă a butonului pe dispozitivele mobile */
-    background: none;
     border: 2px solid grey;
     padding: 20px;
     font-size: 18px;
     color: white;
     margin: 10px;
     cursor: pointer;
-    &:hover {
-      background: white;
-      color: black;
-    }
   }
 `;
 
@@ -127,13 +124,29 @@ const ConnectModal = styled.select`
 `;
 
 const SelectCurrency = styled.select`
-  width: 100%; /* Lățimea completă a selectului pe dispozitivele mobile */
+  width: 100%;
   padding: 10px;
   margin-bottom: 10px;
   border-radius: 5px;
   border: 1px solid #ddd;
+  appearance: none; /* Ascunde săgeata implicită a dropdown-ului */
+  background-repeat: no-repeat;
+  background-position: right 10px center; /* Poziționează imaginea de fundal */
 `;
 
+const Option = styled.option`
+  /* Adaugă imagini de fundal diferite pentru fiecare opțiune */
+  &.eth {
+    background-image: url(${ethIcon});
+    height: 20px;
+  }
+  &.usdt {
+    background-image: url(${usdtIcon});
+  }
+  &.usdc {
+    background-image: url(${usdcIcon});
+  }
+`;
 const Price = styled.div`
   display: flex;
   align-items: center;
@@ -153,6 +166,41 @@ const InfoContainer = styled.div`
   color: #fff;
 `;
 
+// Styled button pentru "Buy with crypto"
+const BuyButton = styled.button`
+  cursor: pointer;
+  background-color: #52B2A7;
+  color: #fff;
+  font-weight: bold;
+  border: none;
+  border-radius: 7px;
+  padding: 10px;
+  margin-right: 10px; /* Adăugați spațiul între butoane */
+`;
 
+// Styled button pentru "Get free tokens"
+const GetTokensButton = styled.button`
+  cursor: pointer;
+  background-color: transparent; /* Background transparent */
+  color: #007bff; /* Culoarea textului */
+  border: 1px solid #007bff; /* Border cu culoarea textului */
+  border-radius: 7px;
+  padding: 10px;
+  &:hover {
+    background: white;
+    color: black;
+  }
+  
+`;
 
-export {ConnectModal, SelectCurrency, Price,Container, Modal, Button, Input, InfoContainer, SpanModal, StyledText };
+// Container pentru butoane
+const ButtonContainer = styled.div`
+  display: flex;
+`;
+
+const SVG = styled.img`
+  width: 200px; /* Ajustați dimensiunea SVG-ului conform nevoilor dvs. */
+  height: 200px; /* Ajustați dimensiunea SVG-ului conform nevoilor dvs. */
+`;
+
+export {Option,SVG,BuyButton, GetTokensButton, ButtonContainer,ConnectModal, SelectCurrency, Price,Container, Modal, Button, Input, InfoContainer, SpanModal, StyledText };
