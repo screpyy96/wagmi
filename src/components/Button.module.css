@@ -1,0 +1,7 @@
+.customButtonWrapper {
+    /* background-color: #ff0000; */
+    border-radius: 4px;
+    padding: 10px 20px;
+    display: inline-block; /* Ensure the wrapper div doesn't stretch */
+  }
+  

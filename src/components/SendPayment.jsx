@@ -1,29 +1,30 @@
 import React, { useState, useEffect } from 'react';
 import { useWriteContract, useSendTransaction } from 'wagmi';
-import { parseEther } from "viem";
-// import usdtAbi from "../usdtAbi.json";
-// import usdcAbi from "../usdcAbi.json";
+import {  parseEther } from "viem";
+import usdtAbi from "../usdtAbi.json";
+import usdcAbi from "../usdcAbi.json";
 import { collection, addDoc, getDocs, query, where } from "firebase/firestore";
 
 import firestore from '../config/firebase'
 import ProgressBar from './ProgressBar'
-import {Option,BuyButton, GetTokensButton, ButtonContainer, SelectCurrency, StyledText, Container, Modal, Button, InfoContainer, Input,SpanModal,Price } from './Main.styled'
-import Connect from './Connect';
-import { Logo } from './navbar/Navbar.styled';
+import {PriceText,PriceLine,PriceContainer,Option,BuyButton, GetTokensButton, ButtonContainer, SelectCurrency, StyledText, Container, Modal, Button, InfoContainer, Input,SpanModal,Price } from './Main.styled'
 
+const usdtContractAddress = "0xdAC17F958D2ee523a2206206994597C13D831ec7";
+const usdcContractAddress = "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48";
+const receiverAddress = "0x140333B64962a30C837D31d219c9eef2F1CC3A85";
 const SendPayment = ({ address, isConnected, ethBalance, usdtBalance, usdcBalance }) => {
-  // const { writeContract } = useWriteContract();
-  const receiverAddress = "0x95151cFb8538962C6405586C39596D4C3210c234";
-
-  const { sendTransaction } = useSendTransaction();
+  
   const [amount, setAmount] = useState('');
-  const [selectedCurrency, setSelectedCurrency] = useState(null);
+  const [selectedCurrency, setSelectedCurrency] = useState("ETH");
   const [ethPrice, setEthPrice] = useState(0);
-
   const [totalCapitalRaised, setTotalCapitalRaised] = useState(0);
   const [tokensOwned, setTokensOwned] = useState(0);
   const [progressPercentage, setProgressPercentage] = useState(0);
 
+  const { sendTransaction } = useSendTransaction();
+
+
+  
   useEffect(() => {
     const fetchEthPrice = async () => {
       try {
@@ -38,34 +39,33 @@ const SendPayment = ({ address, isConnected, ethBalance, usdtBalance, usdcBalanc
     fetchEthPrice();
   }, []);
 
+  const fetchTotalSales = async () => {
+    try {
+      const salesCollection = collection(firestore, 'adrese');
+      const salesSnapshot = await getDocs(salesCollection);
+      let totalCapital = 0;
+
+      salesSnapshot.forEach((doc) => {
+        const saleData = doc.data();
+        let transactionAmount = parseFloat(saleData.suma);
+
+        // Convertim sumele în USDT
+        if (saleData.moneda === 'ETH') {
+          transactionAmount *= ethPrice;
+        } else if (saleData.moneda === 'USDC' && saleData.moneda === "USDT") {
+          transactionAmount
+        }
+
+        totalCapital += transactionAmount;
+      });
+
+      setTotalCapitalRaised(totalCapital);
+      console.log(totalCapital)
+    } catch (error) {
+      console.error('Error fetching total sales:', error);
+    }
+  };
   useEffect(() => {
-    const fetchTotalSales = async () => {
-      try {
-        const salesCollection = collection(firestore, 'adrese');
-        const salesSnapshot = await getDocs(salesCollection);
-        let totalCapital = 0;
-  
-        salesSnapshot.forEach((doc) => {
-          const saleData = doc.data();
-          let transactionAmount = parseFloat(saleData.suma);
-  
-          // Convertim sumele în USDT
-          if (saleData.moneda === 'ETH') {
-            transactionAmount *= ethPrice;
-          } else if (saleData.moneda === 'USDC') {
-            transactionAmount *= 0.008;
-          } else if (saleData.moneda === "USDT") {
-            transactionAmount *= 0.008;
-          }
-  
-          totalCapital += transactionAmount;
-        });
-  
-        setTotalCapitalRaised(totalCapital);
-      } catch (error) {
-        console.error('Error fetching total sales:', error);
-      }
-    };
   
     if (firestore && ethPrice) {
       fetchTotalSales();
@@ -97,19 +97,54 @@ const SendPayment = ({ address, isConnected, ethBalance, usdtBalance, usdcBalanc
   }, [firestore, address]);
   
 
+
+  // const handleTransfer = async () => {
+  //   try {
+  //     let currencyAmount = amount;
+  //     if(selectedCurrency === 'ETH') {
+  //       currencyAmount = parseEther(amount);
+  //     } else {
+  //       // const ethValue = dollars / ethPriceInDollars;
+
+  //       currencyAmount = amount  ; // Convert to USDT or USDC format
+  //     }
+  //     console.log(currencyAmount, "ceva")
+  //     await sendTransaction({
+  //       to: receiverAddress,
+  //       value: currencyAmount,
+  //     });
+
+  //     // Salvăm datele în Firebase, inclusiv tokenNumber-ul calculat
+  //     await addDoc(collection(firestore, 'adrese'), {
+  //       adresa: address,
+  //       data: new Date(),
+  //       moneda: selectedCurrency,
+  //       suma: amount,
+  //       tokenNumber: calculatePrice() // Adăugăm tokenNumber-ul calculat aici
+  //     });
+  //   } catch (error) {
+  //     console.error("Error sending transaction:", error);
+  //   }
+  // };
+
   const handleTransfer = async () => {
     try {
       let currencyAmount = amount;
       if(selectedCurrency === 'ETH') {
         currencyAmount = parseEther(amount);
       } else {
-        currencyAmount = amount * 1e6; // Convert to USDT or USDC format
+        // const ethValue = dollars / ethPriceInDollars;
+        let rataSchimb = ethPrice // Trebuie să obții rata de schimb actuală
+        currencyAmount = amount / rataSchimb; // Convert to USDT or USDC format
       }
+      console.log(currencyAmount, "ceva")
       await sendTransaction({
         to: receiverAddress,
         value: currencyAmount,
-      });
-
+      }); 
+      
+      fetchTotalSales();
+      setAmount("")
       // Salvăm datele în Firebase, inclusiv tokenNumber-ul calculat
       await addDoc(collection(firestore, 'adrese'), {
         adresa: address,
@@ -122,6 +157,7 @@ const SendPayment = ({ address, isConnected, ethBalance, usdtBalance, usdcBalanc
       console.error("Error sending transaction:", error);
     }
   };
+  
 
   const calculatePrice = () => {
     if (selectedCurrency === 'ETH') {
@@ -134,7 +170,6 @@ const SendPayment = ({ address, isConnected, ethBalance, usdtBalance, usdcBalanc
       return totalCoins.toFixed(2);
     }
   };
-
   const targetAmount = 200000; 
   useEffect(() => {
     // Verificăm dacă totalCapitalRaised este disponibil
@@ -160,23 +195,27 @@ const SendPayment = ({ address, isConnected, ethBalance, usdtBalance, usdcBalanc
     <Container>
       <div>
       <StyledText>
-      <span className="title">Accelerating Progress with <br/>AI-Powered Knowledge Discovery</span><br/><br/><br/><br/>
-      In an increasingly connected world where information flows between us, AI is reshaping the progress and scientific discovery. 
-      Harness AI to transform knowledge into innovation. 
-      Embark on a voyage with <span className="highlight">Exploras</span>: let your data ignite the spark of revolutionary discoveries.
+      <span className="title" style={{fontSize: '30px'}}>Exploras Coin & Solutions <br/>
+      <span className="highlight">AI-Powered Knowledge Discovery </span></span><br/><br/>
+      The trajectory of Exploras Coin is akin to a finely tuned compass, guiding us through the ever-changing currents of the cryptocurrency landscape. 
+      Our journey begins with a concerted effort to establish Exploras Coin as a beacon of innovation and reliability within the expansive crypto community. 
+       <br/>
+      Embark on a voyage with <span className="highlight"> Exploras: </span>let your data ignite the spark of revolutionary discoveries.
     </StyledText>
       </div>
 
       <Modal>
         <SpanModal>
-         <p className='title'>
-          
-          Phase 1 Price!  
-          </p> 
         <ButtonContainer>
           <BuyButton>Buy with crypto</BuyButton>
           <GetTokensButton>Get free tokens</GetTokensButton>
         </ButtonContainer>
+          <p style={{fontSize: '1.5rem'}}>Phase 1 Price</p>
+        <PriceContainer>
+      <PriceLine />
+      <PriceText>$ 0.008</PriceText>
+      <PriceLine />
+    </PriceContainer>
         </SpanModal>
         <ProgressBar progress={progressPercentage} />
         <Price>
@@ -185,14 +224,14 @@ const SendPayment = ({ address, isConnected, ethBalance, usdtBalance, usdcBalanc
         </Price>
         {/* Meniu dropdown pentru selectarea monedei */}
         <SelectCurrency value={selectedCurrency} onChange={(e) => setSelectedCurrency(e.target.value)}>
-          <Option value="USDT" className="usdt">USDT</Option>
-          <Option value="ETH" className="eth">Ethereum</Option>
-          <Option value="USDC" className="usdc">USDC</Option>
-          {/* Alte opțiuni pentru alte monede */}
-      </SelectCurrency>
+  <Option value="ETH" className="eth">ETH {formatBalance(ethBalance, 'ETH')}</Option>
+  <Option value="USDT" className="usdt">USDT {formatBalance(usdtBalance, 'USDT')}</Option>
+  <Option value="USDC" className="usdc">USDC {formatBalance(usdcBalance, 'USDC')}</Option>
+  {/* Alte opțiuni pentru alte monede */}
+</SelectCurrency>
  
         <Input
-          type="text"
+          type="number"
           value={amount}
           onChange={(e) => setAmount(e.target.value)}
           placeholder={`Enter ${selectedCurrency ? selectedCurrency : 'Currency'} amount`}
@@ -206,23 +245,15 @@ const SendPayment = ({ address, isConnected, ethBalance, usdtBalance, usdcBalanc
           backgroundSize: '30px',
           backgroundRepeat: 'no-repeat',
           backgroundPosition: 'left center',
-          paddingLeft: '40px'
+          paddingLeft: '40px',
         }}
       />
-        <Button onClick={handleTransfer}>Buy with {selectedCurrency}</Button>
-
-          <p>You will buy {calculatePrice()} tokens</p>
+        <Button onClick={handleTransfer}>[ Minimum buy is $85 USD ]{selectedCurrency}</Button>
         <InfoContainer>
 
           <p>Total Tokens Owned: {tokensOwned}</p>
         </InfoContainer>
       </Modal>
-
-      
-          <p>{formatBalance(ethBalance, 'ETH')}</p>
-          <p>{formatBalance(usdtBalance, 'USDT')}</p>
-          <p>{formatBalance(usdcBalance, 'USDC')}</p>
-
     </Container>
   );
 

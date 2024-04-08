@@ -8,13 +8,17 @@ const Container = styled.div`
   align-items: center;
   grid-template-columns: 1fr 1fr;
   padding: 20px;
-  margin-top: 50px; /* Reducerea margin-top-ului pentru a îmbunătăți vizibilitatea pe dispozitivele mobile */
-  overflow: hidden;
+  margin-top: 120px; /* Reducerea margin-top-ului pentru a îmbunătăți vizibilitatea pe dispozitivele mobile */
+  margin-bottom: 40px;
+  
   @media (max-width: 768px) {
     grid-template-columns: 1fr; /* Schimbarea la o singură coloană pe dispozitivele mobile */
     margin-top: 20px; /* Reducerea margin-top-ului și ajustarea la distanța dorită pe dispozitivele mobile */
+    max-width: 100vw;
+    padding: 0;
   }
 `;
+
 
 const Modal = styled.div`
   color: white;
@@ -27,9 +31,9 @@ const Modal = styled.div`
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0 0 100px rgba(0, 0, 0, 0.5);
-  background-color: rgba(0, 0, 0, 0); /* Background semi-transparent */
+  background-color: rgba(255, 255, 255, 0.2); /* Setăm culoarea de fundal la alb semi-transparent */
   backdrop-filter: blur(5px); /* Adăugăm un efect de blur */
-
+  
   /* Stiluri pentru titlul modalului */
   .title {
     font-size: 28px;
@@ -41,6 +45,7 @@ const Modal = styled.div`
   @media (max-width: 768px) {
     width: 100%; /* Ajustarea la lățimea maximă a ecranului pe dispozitivele mobile */
     padding: 10px; /* Reducerea padding-ului pentru a îmbunătăți aspectul pe dispozitivele mobile */
+    max-width: 100vw;
   }
 `;
 
@@ -56,7 +61,7 @@ const Button = styled.button`
 
 
   @media (max-width: 768px) {
-    width: 100%; /* Ajustarea lățimii butonului pentru a ocupa întreaga lățime a ecranului */
+    max-width: 100vw; /* Ajustarea lățimii butonului pentru a ocupa întreaga lățime a ecranului */
   }
 `;
 
@@ -74,7 +79,7 @@ const Input = styled.input`
     color: #fff; /* Culoarea dorită pentru placeholder */
   }
   @media (max-width: 768px) {
-    width: 100%; /* Ajustarea lățimii inputului pentru a ocupa întreaga lățime a ecranului */
+    max-width: 100vw; /* Ajustarea lățimii inputului pentru a ocupa întreaga lățime a ecranului */
   }
 `;
 
@@ -92,6 +97,9 @@ const SpanModal = styled.div`
     color: white;
     margin: 10px;
     cursor: pointer;
+    @media (max-width: 768px) {
+padding: 12px;
+    }
   }
 `;
 
@@ -112,13 +120,13 @@ const StyledText = styled.p`
   }
 
   @media (max-width: 768px) {
-    max-width: 90%; /* Ajustarea lățimii maxime a textului pe dispozitivele mobile */
+    max-width: 90vw;; /* Ajustarea lățimii maxime a textului pe dispozitivele mobile */
     margin: 0 auto; /* Centrarea textului pe ecranele mai mici */
     margin-bottom: 100px;
   }
 `;
 
-const ConnectModal = styled.select`
+const ConnectModal = styled.div`
   display: flex;
   width: 100%;
 `;
@@ -174,8 +182,12 @@ const BuyButton = styled.button`
   font-weight: bold;
   border: none;
   border-radius: 7px;
-  padding: 10px;
-  margin-right: 10px; /* Adăugați spațiul între butoane */
+  width:100%;
+
+    @media (max-width: 768px) {
+    max-width: 90vw; /* Ajustarea lățimii maxime a textului pe dispozitivele mobile */
+    padding: 12px;
+  }
 `;
 
 // Styled button pentru "Get free tokens"
@@ -186,6 +198,7 @@ const GetTokensButton = styled.button`
   border: 1px solid #007bff; /* Border cu culoarea textului */
   border-radius: 7px;
   padding: 10px;
+  width: 100%;
   &:hover {
     background: white;
     color: black;
@@ -196,11 +209,39 @@ const GetTokensButton = styled.button`
 // Container pentru butoane
 const ButtonContainer = styled.div`
   display: flex;
+  width: 100%;
+    @media (max-width: 768px) {
+    max-width: 100vw; /* Ajustarea lățimii maxime a textului pe dispozitivele mobile */
+     
+  }
 `;
 
-const SVG = styled.img`
-  width: 200px; /* Ajustați dimensiunea SVG-ului conform nevoilor dvs. */
-  height: 200px; /* Ajustați dimensiunea SVG-ului conform nevoilor dvs. */
+
+const PriceContainer = styled.div`
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+    @media (max-width: 768px) {
+    max-width: 90vw;; /* Ajustarea lățimii maxime a textului pe dispozitivele mobile */
+    margin: 0 auto; /* Centrarea textului pe ecranele mai mici */
+  }
 `;
 
-export {Option,SVG,BuyButton, GetTokensButton, ButtonContainer,ConnectModal, SelectCurrency, Price,Container, Modal, Button, Input, InfoContainer, SpanModal, StyledText };
+const PriceLine = styled.div`
+  flex-grow: 1;
+  height: 2px;
+  background-color: #fff; /* Culoarea liniilor */
+  width: 100%;
+    @media (max-width: 768px) {
+    max-width: 100vw;; /* Ajustarea lățimii maxime a textului pe dispozitivele mobile */
+    margin: 0 auto; /* Centrarea textului pe ecranele mai mici */
+  }
+`;
+
+const PriceText = styled.p`
+  padding: 0 10px; /* Spațiere între text și liniile */
+  font-size: 1.2rem;
+  width: 600px;
+  text-align: center;
+`;
+export {PriceText,PriceLine,PriceContainer,Option,BuyButton, GetTokensButton, ButtonContainer,ConnectModal, SelectCurrency, Price,Container, Modal, Button, Input, InfoContainer, SpanModal, StyledText };

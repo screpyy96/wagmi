@@ -1,6 +1,6 @@
 "use client";
-
-import { useState } from "react";
+import { StyleSheetManager } from 'styled-components';
+import { useState, useEffect } from "react";
 import { AiOutlineMenu, AiOutlineClose } from "react-icons/ai";
 import {
   Header,
@@ -13,7 +13,7 @@ import {
   MobileMenuItem,
   StyledLink
 } from "./Navbar.styled";
-import Connect from '@/components/Connect';
+import Connect from '../Connect';
 
 const Navbar = () => {
   const [menuIcon, setMenuIcon] = useState(false);
@@ -22,10 +22,28 @@ const Navbar = () => {
     setMenuIcon(!menuIcon);
   };
 
+  const [prevScrollPos, setPrevScrollPos] = useState(window.scrollY);
+  const [visible, setVisible] = useState(true);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollPos = window.scrollY;
+      const visible = prevScrollPos > currentScrollPos;
+
+      setPrevScrollPos(currentScrollPos);
+      setVisible(visible);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [prevScrollPos]);
+
+
+
   return (
-    <Header>
-      <div>
-        <Nav>
+    <Header style={{ top: visible ? '0' : '-80px' }}>
+        <Nav  >
 
           <Menu>
             <MenuItem>
@@ -33,14 +51,15 @@ const Navbar = () => {
                 Home
               </StyledLink>
             </MenuItem>
-            <MenuItem>
-              <StyledLink href="https://iosifs-organization.gitbook.io/explora/" target="blank" passHref>
-                Whitepaper
-              </StyledLink>
-            </MenuItem>
+            
             <MenuItem>
               <StyledLink href="/pages/stacking" passHref>
                 Staking
+              </StyledLink>
+            </MenuItem>
+            <MenuItem>
+              <StyledLink href="/pages/roadmap" passHref>
+                Roadmap
               </StyledLink>
             </MenuItem>
           </Menu>
@@ -50,14 +69,15 @@ const Navbar = () => {
             </StyledLink>
           </div>
           <Menu>
-            <MenuItem>
-              <StyledLink href="/pages/roadmap" passHref>
-                Roadmap
-              </StyledLink>
-            </MenuItem>
+           
             <MenuItem>
               <StyledLink href="/pages/how-to-buy" passHref>
                 How To Buy
+              </StyledLink>
+            </MenuItem>
+            <MenuItem>
+              <StyledLink href="https://explorascoin.gitbook.io/whitepaper/" target="blank" passHref>
+                Whitepaper
               </StyledLink>
             </MenuItem>
             <MenuItem>
@@ -67,8 +87,8 @@ const Navbar = () => {
       
 
           
-          <MobileMenuIcon onClick={handleSmallerScreensNavigation}>
-          <MenuItem>
+          <MobileMenuIcon onClick={handleSmallerScreensNavigation} style={{ top: visible ? '0' : '0' }}>
+          <MenuItem >
                       <Connect/>
                       </MenuItem>
             {menuIcon ? (
@@ -79,8 +99,9 @@ const Navbar = () => {
                 </div>
             )}
           </MobileMenuIcon>
-
-          <MobileMenuBackground isopen={menuIcon}>
+          <StyleSheetManager shouldForwardProp={prop => prop !== 'isopen'}>
+          <MobileMenuBackground isopen={+menuIcon}>
+            
             
             <Menu>
               <MobileMenuItem onClick={handleSmallerScreensNavigation}>
@@ -89,7 +110,7 @@ const Navbar = () => {
                 </StyledLink>
               </MobileMenuItem>
               <MobileMenuItem onClick={handleSmallerScreensNavigation}>
-                <StyledLink href="/pages/stacking" passHref>
+                <StyledLink href="https://explorascoin.gitbook.io/whitepaper/" passHref>
                   Whitepaper
                 </StyledLink>
               </MobileMenuItem>
@@ -115,8 +136,8 @@ const Navbar = () => {
              
             </Menu>
           </MobileMenuBackground>
+          </StyleSheetManager>
         </Nav>
-      </div>
     </Header>
   );
 };

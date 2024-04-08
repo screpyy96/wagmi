@@ -10,8 +10,8 @@ export const config = defaultWagmiConfig({
   projectId,
   chains: [mainnet, sepolia],
   metadata: {
-    name: 'My App',
-    description: 'My app description',
+    name: 'Exploras ',
+    description: 'Seamless bookings - Rewarding experiences | The future of travel',
     url: 'https://myapp.com',
     icons: ['https://myapp.com/favicon.ico']
   },

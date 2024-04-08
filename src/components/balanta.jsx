@@ -28,7 +28,6 @@ const Balanta = ({ address }) => {
 
   return (
     <div>
-      <div>
       <SendPayment 
         address={address} 
         ethBalance={ethBalance}
@@ -36,8 +35,7 @@ const Balanta = ({ address }) => {
         usdcBalance={usdcBalance}
         />
 
-        
-      </div>
+
     </div>
   );
 }

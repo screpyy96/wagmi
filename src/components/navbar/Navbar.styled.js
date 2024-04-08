@@ -12,82 +12,38 @@ const StyledLink = styled(Link)`
 
 
 const Header = styled.header`
-  // color: #fff;
-  margin: 0 auto;
-  width: 89%;
+position: fixed;
+width: 100%;
+z-index: 999; 
+  
 `;
 
 // Stilurile pentru meniul de navigare
+// Stilurile pentru meniul de navigare
 const Nav = styled.nav`
-max-width: 100%;
 
-height: 150px;
-display: flex;
-justify-content: space-between;
-align-items: center;
-padding: 1rem;
 
+  height: 80px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  
+  margin: 0 auto;
+  top: 0;
+  padding: 20px;
+width: 90%;
+  border-radius: 6px;
+  box-shadow: 0 0 100px rgba(0, 0, 0, 0.5);
+  background-color: rgba(255, 255, 255, 0.2); 
+  backdrop-filter: blur(5px); 
+  
+  @media (max-width: 768px) {
+    border-radius: 0;
+    width: 100%;
+  }
 `;
 
 
-
-// Definim o animație folosind keyframes
-// const rotate360 = keyframes`
-//   from {
-//     transform: rotate(0deg); /* Pornim de la 0 de grade */
-//   }
-//   to {
-//     transform: rotate(360deg); /* Ajungem la 360 de grade */
-//   }
-// `;
-
-// // Stilurile pentru logo
-// const Logo = styled.img`
-//   height: 100px;
-//   width: 100px;
-//   text-transform: uppercase;
-//   cursor: pointer;
-//   animation: ${rotate360} 2s linear infinite; /* Aplicăm animația */
-  
-//   @media (max-width: 768px) {
-//     height: 80px;
-//     width: 80px;
-//     position: absolute;
-//     top: 3%;
-//     left: 5%;
-//   }
-// `;
-
-// const pulse = keyframes`
-//   0% {
-//     transform: scale(1); /* Marime normala */
-//   }
-//   50% {
-//     transform: scale(1.1); /* Creste marimea */
-//   }
-//   100% {
-//     transform: scale(1); /* Se revine la marimea normala */
-// }
-// `;
-
-// // Stilurile pentru logo
-// const Logo = styled.img`
-//   height: 100px;
-//   width: 100px;
-//   text-transform: uppercase;
-//   cursor: pointer;
-//   animation: ${pulse} 2s ease infinite alternate; /* Aplicam animatia pulsatie */
-
-//   @media (max-width: 768px) {
-//     height: 80px;
-//     width: 80px;
-//     position: absolute;
-//     top: 3%;
-//     left: 5%;
-//   }
-// `;
-
-// Animatie de schimbare a culorii
 const colorChange = keyframes`
   0% {
     filter: hue-rotate(0deg); /* Se roteste la 0 grade */
@@ -104,7 +60,7 @@ const Logo = styled.img`
   text-transform: uppercase;
   cursor: pointer;
   // animation: ${colorChange} 5s linear infinite; /* Aplicăm animația de schimbare a culorii */
-
+padding: 20px;
   @media (max-width: 768px) {
     height: 80px;
     width: 80px;
@@ -117,6 +73,7 @@ const Logo = styled.img`
 // Stilurile pentru meniul principal
 const Menu = styled.ul`
   display: block;
+  width: 100%;
 
   @media (max-width: 768px) {
     display: block;
@@ -155,37 +112,34 @@ const MobileMenuIcon = styled.div`
 const MobileMenuBackground = styled.div`
   display: none;
   position: absolute;
-  // top: 100px;
+  top: 80px;
   right: 0;
   bottom: 0;
   left: 0;
   justify-content: center;
   align-items: center;
-  width: 100%;
-  height: 100%;
+  min-width: 100vw;
+  height: 100vh;
   color: black;
-  transition: ease-in 300ms;
-  background-color: rgba(0, 0, 0, 0.5); /* Adăugăm un background semi-transparent */
 
-  /* Adăugăm un efect de blur folosind backdrop-filter */
-  backdrop-filter: blur(10px); /* Poți ajusta valoarea pentru a obține gradul de blur dorit */
-z-index: 90;
-  ${props =>
-    props.isopen &&
-    `
-    display: flex;
-    transition: ease-in 300ms;
+
+  && {
+    ${props => props.isopen &&
+      `
+      z-index: 999;
+      display: flex;
     background-color: rgba(0, 0, 0, 0.5); /* Adăugăm un background semi-transparent */
   
     /* Adăugăm un efect de blur folosind backdrop-filter */
-    backdrop-filter: blur(10px); /* Poți ajusta valoarea pentru a obține gradul de blur dorit */
-  
-  `}
+    backdrop-filter: blur(10px);
+      
+    `}
+  }
 `;
 
 // Stilurile pentru elementele de meniu mobil
 const MobileMenuItem = styled.li`
-  padding: 1rem;
+  padding: 1rem; //e okay
   cursor: pointer;
   display: ${props => (props.isopen ? 'none' : 'block')}; // Modificare aici
   text-align: center;

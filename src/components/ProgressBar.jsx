@@ -1,5 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
+import { StyleSheetManager } from 'styled-components';
+
 
 // Stilizare pentru containerul de progres
 export const ProgressBarContainer = styled.div`
@@ -28,7 +30,7 @@ export const ProgressText = styled.span`
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%); /* Centrare absolută */
-  color: #fff;
+  color: #52B2A7;
   font-size: 12px;
   font-weight: bold;
 `;
@@ -36,8 +38,11 @@ export const ProgressText = styled.span`
 const ProgressBar = ({ progress }) => {
   return (
     <ProgressBarContainer>
+      <StyleSheetManager shouldForwardProp={prop => prop !== 'isopen'}>
+
       <Progress progress={progress} />
-      <ProgressText>{progress}%</ProgressText>
+      <ProgressText>{progress.toFixed(2)}%</ProgressText>
+      </StyleSheetManager>
     </ProgressBarContainer>
   );
 };
