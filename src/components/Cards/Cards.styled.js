@@ -5,7 +5,7 @@ display: grid;
 grid-template-columns: repeat(3, 1fr); /* 3 columns with equal width */
 gap: 20px; /* Spacing between grid items */
 border-radius: 10px;
-margin-top: 80px;
+margin-top: 70px;
 padding: 20px;
 @media (max-width: 768px) {
   
@@ -60,7 +60,7 @@ const Description = styled.p`
 const MainTitle = styled.h2`
 text-align: center;
 color: white;
-margin-top: 50px;
+margin-top: 30px;
 margin-bottom: -30px;
 `;
 export {MainTitle,Title,Description,CardImg,MainContainer,CardContainer}

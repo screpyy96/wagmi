@@ -22,29 +22,16 @@ const Navbar = () => {
     setMenuIcon(!menuIcon);
   };
 
-  const [prevScrollPos, setPrevScrollPos] = useState(window.scrollY);
-  const [visible, setVisible] = useState(true);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const currentScrollPos = window.scrollY;
-      const visible = prevScrollPos > currentScrollPos;
-
-      setPrevScrollPos(currentScrollPos);
-      setVisible(visible);
-    };
-
-    window.addEventListener('scroll', handleScroll);
-
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, [prevScrollPos]);
-
-
 
   return (
-    <Header style={{ top: visible ? '0' : '-80px' }}>
+    <Header >
+      
         <Nav  >
-
+        <div>
+            <StyledLink href="/" passHref>
+              <Logo src="../../../white.svg" alt="logo"/>
+            </StyledLink>
+          </div>
           <Menu>
             <MenuItem>
               <StyledLink href="/" passHref>
@@ -62,14 +49,7 @@ const Navbar = () => {
                 Roadmap
               </StyledLink>
             </MenuItem>
-          </Menu>
-          <div>
-            <StyledLink href="/" passHref>
-              <Logo src="../../../white.svg" alt="logo"/>
-            </StyledLink>
-          </div>
-          <Menu>
-           
+
             <MenuItem>
               <StyledLink href="/pages/how-to-buy" passHref>
                 How To Buy
@@ -87,7 +67,7 @@ const Navbar = () => {
       
 
           
-          <MobileMenuIcon onClick={handleSmallerScreensNavigation} style={{ top: visible ? '0' : '0' }}>
+          <MobileMenuIcon onClick={handleSmallerScreensNavigation}>
           <MenuItem >
                       <Connect/>
                       </MenuItem>
@@ -130,7 +110,9 @@ const Navbar = () => {
                 </StyledLink>
               </MobileMenuItem>
               <MobileMenuItem onClick={handleSmallerScreensNavigation}>
+              <div style={{margin: "0 auto", width: "35%"}}>
                 <Connect/>
+                </div> 
               </MobileMenuItem>
 
              

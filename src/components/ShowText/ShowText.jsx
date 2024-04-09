@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 import {HoverText,
     Container,
-    ButtonContainer,Button,Wrapper} from "./ShowText.styled"
+    ButtonContainer,Button,Wrapper,ResponsiveImage} from "./ShowText.styled"
 
 
     const HoverTextComponent = () => {
@@ -11,22 +11,22 @@ import {HoverText,
           {
             title: "https://satoshidex.ai/svg/featured/iconHolder.svg",
            button: "Read More 📈",
-            text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum ut orci sit amet mi commodo vehicula."
+            text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum ut orci sit amet mi commodo vehicula.,Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum ut orci sit amet mi commodo vehicula.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum ut orci sit amet mi commodo vehicula."
           },
           {
             title: "https://satoshidex.ai/svg/featured/bussinesInsider.svg",
            button: "Read More 📈",
-            text: "Nulla facilisi. Ut posuere lorem id massa interdum, sed aliquet lacus hendrerit."
+            text: "Nulla facilisi. Ut posuere lorem id massa iLorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum ut orci sit amet mi commodo vehicula.nterdum, sed aliquet lacus hendrerit."
           },
           {
             title: "https://satoshidex.ai/svg/featured/finBold.svg",
            button: "Read More 📈",
-            text: "Pellentesque et nisl vel enim tempor fermentum. Cras ut rutrum orci."
+            text: "Pellentesque et nisl vel enim tempLorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum ut orci sit amet mi commodo vehicula.or fermentum. Cras ut rutrum orci."
           },
           {
             title: "https://satoshidex.ai/svg/featured/yahoo.svg",
            button: "Read More 📈",
-            text: "Vivamus nec nibh nec elit varius consectetur. Integer commodo leo eu malesuada finibus."
+            text: "Vivamus nec nibh nec elit vaLorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum ut orci sit amet mi commodo vehicula.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum ut orci sit amet mi commodo vehicula.rius consectetur. Integer commodo leo eu malesuada finibus."
           },
           {
             title: "https://satoshidex.ai/svg/featured/coinMarket.svg",
@@ -36,7 +36,7 @@ import {HoverText,
           {
             title: "https://satoshidex.ai/svg/featured/msn.svg",
           button: "Read More 📈",
-            text: "Suspendisse potenti. Sed ac felis fermentum, finibus odio et, lobortis ligula."
+            text: "Suspendisse potenti. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum ut orci sit amet mi commodo vehicula.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum ut orci sit amet mi commodo vehicula.Sed ac felis fermentum, finibus odio et, lobortis ligula."
           }
         ];
       
@@ -48,10 +48,6 @@ const handleMouseEnter = (text) => {
     setDisplayText(text);
   };
 
-        // Funcție pentru a șterge textul când mouse-ul este scos de pe buton
-
-      
-        // Array de obiecte cu titluri și texte asociate
         return (
           
               <Wrapper>
@@ -63,11 +59,12 @@ const handleMouseEnter = (text) => {
                       onMouseEnter={() => handleMouseEnter(item.text)}
 
                   >
-                      <img src={item.title} alt="" style={{width: "30px;", height: "22px"}}/>
+                     <ResponsiveImage src={item.title} alt="" />
                   </ButtonContainer>
                   ))}
                 </Container>
-                  <HoverText>
+                  <HoverText >
+
                        <p>{displayText}</p>
                       <Button>Read More</Button>
                   </HoverText>

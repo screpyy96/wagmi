@@ -16,6 +16,7 @@ const Container = styled.div`
     margin-top: 20px; /* Reducerea margin-top-ului și ajustarea la distanța dorită pe dispozitivele mobile */
     max-width: 100vw;
     padding: 0;
+    margin-top: 100px;
   }
 `;
 
@@ -29,7 +30,7 @@ const Modal = styled.div`
   align-items: center;
   justify-content: start;
   padding: 20px;
-  border-radius: 10px;
+  border-radius: 1rem;
   box-shadow: 0 0 100px rgba(0, 0, 0, 0.5);
   background-color: rgba(255, 255, 255, 0.2); /* Setăm culoarea de fundal la alb semi-transparent */
   backdrop-filter: blur(5px); /* Adăugăm un efect de blur */
@@ -102,7 +103,6 @@ padding: 12px;
     }
   }
 `;
-
 const StyledText = styled.p`
   font-size: 20px;
   line-height: 1.5;
@@ -181,7 +181,9 @@ const BuyButton = styled.button`
   color: #fff;
   font-weight: bold;
   border: none;
-  border-radius: 7px;
+  border-radius: 1rem;
+  border-color: #52B2A7;
+  border: 0;
   width:100%;
 
     @media (max-width: 768px) {

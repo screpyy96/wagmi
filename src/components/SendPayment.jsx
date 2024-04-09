@@ -204,18 +204,18 @@ const SendPayment = ({ address, isConnected, ethBalance, usdtBalance, usdcBalanc
     </StyledText>
       </div>
 
-      <Modal>
-        <SpanModal>
-        <ButtonContainer>
-          <BuyButton>Buy with crypto</BuyButton>
-          <GetTokensButton>Get free tokens</GetTokensButton>
-        </ButtonContainer>
+       <Modal> 
+      <SpanModal>
           <p style={{fontSize: '1.5rem'}}>Phase 1 Price</p>
         <PriceContainer>
       <PriceLine />
       <PriceText>$ 0.008</PriceText>
       <PriceLine />
     </PriceContainer>
+        <ButtonContainer>
+          <BuyButton>Buy with crypto</BuyButton>
+          <GetTokensButton>Get free tokens</GetTokensButton>
+        </ButtonContainer>
         </SpanModal>
         <ProgressBar progress={progressPercentage} />
         <Price>

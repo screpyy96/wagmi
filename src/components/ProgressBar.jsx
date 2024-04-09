@@ -11,6 +11,9 @@ export const ProgressBarContainer = styled.div`
   background-color: #ddd;
   border-radius: 10px;
   margin-top: 20px;
+  @media (max-width: 768px) {
+    height: 40px;
+  }
 `;
 
 // Stilizare pentru bara de progres
@@ -30,7 +33,7 @@ export const ProgressText = styled.span`
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%); /* Centrare absolută */
-  color: #52B2A7;
+  color: black;
   font-size: 12px;
   font-weight: bold;
 `;

@@ -13,26 +13,26 @@ const StyledLink = styled(Link)`
 
 const Header = styled.header`
 position: fixed;
-width: 100%;
-z-index: 999; 
+top: 10px;
+left: 5%;
+width: 90%;
+margin: 0 auto;
+z-index: 1; 
+  @media (max-width: 768px) {
+   
+  }
   
 `;
 
 // Stilurile pentru meniul de navigare
 // Stilurile pentru meniul de navigare
 const Nav = styled.nav`
-
-
   height: 80px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  
-  margin: 0 auto;
-  top: 0;
-  padding: 20px;
-width: 90%;
-  border-radius: 6px;
+  padding: 30px;
+  border-radius: 1rem;
   box-shadow: 0 0 100px rgba(0, 0, 0, 0.5);
   background-color: rgba(255, 255, 255, 0.2); 
   backdrop-filter: blur(5px); 
@@ -72,9 +72,10 @@ padding: 20px;
 
 // Stilurile pentru meniul principal
 const Menu = styled.ul`
-  display: block;
+  display: flex;
   width: 100%;
-
+  align-items: center;
+  justify-content: end;
   @media (max-width: 768px) {
     display: block;
 
@@ -108,7 +109,7 @@ const MobileMenuIcon = styled.div`
   }
 `;
 
-// Stilurile pentru fundalul meniului mobil
+
 const MobileMenuBackground = styled.div`
   display: none;
   position: absolute;
@@ -122,20 +123,20 @@ const MobileMenuBackground = styled.div`
   height: 100vh;
   color: black;
 
-
   && {
-    ${props => props.isopen &&
-      `
+    ${props => props.isopen && `
       z-index: 999;
       display: flex;
-    background-color: rgba(0, 0, 0, 0.5); /* Adăugăm un background semi-transparent */
-  
-    /* Adăugăm un efect de blur folosind backdrop-filter */
-    backdrop-filter: blur(10px);
-      
+      background-image: url("https://www.explorascoin.com/_next/static/media/background.ee28fc1e.jpeg");
+      background-size: cover; /* Imaginea acoperă întreaga suprafață */
+      background-position: center; /* Imaginea este poziționată în centrul containerului */
+      background-repeat: no-repeat; /* Imaginea nu este repetată */
     `}
   }
 `;
+
+export default MobileMenuBackground;
+
 
 // Stilurile pentru elementele de meniu mobil
 const MobileMenuItem = styled.li`
@@ -144,6 +145,8 @@ const MobileMenuItem = styled.li`
   display: ${props => (props.isopen ? 'none' : 'block')}; // Modificare aici
   text-align: center;
   position: relative;
+  width: auto;
+  margin: 0 auto;
   
   top: 0px;
   &:hover {

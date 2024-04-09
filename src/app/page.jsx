@@ -34,8 +34,8 @@ const Content = styled.div`
         <Navbar address={address}/>
         {/* <Spacer/> */}
         <Balanta address={address}/>
-        <ShowText />
         <Cards />
+        <ShowText />
         <Content/>
       </div>
     );
