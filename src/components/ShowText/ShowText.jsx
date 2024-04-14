@@ -31,7 +31,7 @@ import {HoverText,
           {
             title: "https://satoshidex.ai/svg/featured/coinMarket.svg",
            button: "Read More 📈",
-            text: "Duis vel lorem at mi rhoncus luctus. Nulla ut bibendum arcu."
+            text: "Duis vel lorem at mi rhoncus luctus. Nulla ut bibendum arcu.Duis vel lorem at mi ,Duis vel lorem at mi rhoncus luctus. Nulla ut bibendum arcu. ,rhoncus luctus. Nulla ut bibendum arcu."
           },
           {
             title: "https://satoshidex.ai/svg/featured/msn.svg",
@@ -50,26 +50,28 @@ const handleMouseEnter = (text) => {
 
         return (
           
-              <Wrapper>
-                <Container>
-                  {/* Generarea butoanelor */}
-                  {content.map((item, index) => (
-                  <ButtonContainer
-                      key={index}
-                      onMouseEnter={() => handleMouseEnter(item.text)}
-
-                  >
-                     <ResponsiveImage src={item.title} alt="" />
-                  </ButtonContainer>
-                  ))}
-                </Container>
-                  <HoverText >
-
-                       <p>{displayText}</p>
-                      <Button>Read More</Button>
-                  </HoverText>
-              </Wrapper>
-      
+                <>
+                  <h2 style={{color: "white", marginTop: "50px", textAlign: "center", padding: "20px"}}>Showed in</h2>
+                <Wrapper>
+                  <Container>
+                    {/* Generarea butoanelor */}
+                    {content.map((item, index) => (
+                    <ButtonContainer
+                        key={index}
+                        onMouseEnter={() => handleMouseEnter(item.text)}
+                    >
+                       <ResponsiveImage src={item.title} alt="" />
+                    </ButtonContainer>
+                    ))}
+                    </Container>
+                    <HoverText >
+                          <h3>Very long title</h3>
+                         <p>{displayText}</p>
+                        <Button>Read More</Button>
+                    </HoverText>
+                  
+                 </Wrapper>
+                </>
         );
       };
       

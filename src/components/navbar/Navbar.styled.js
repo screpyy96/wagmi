@@ -13,13 +13,16 @@ const StyledLink = styled(Link)`
 
 const Header = styled.header`
 position: fixed;
-top: 10px;
-left: 5%;
-width: 90%;
+top: 20px;
+width: 100%;
 margin: 0 auto;
 z-index: 1; 
   @media (max-width: 768px) {
-   
+    position: fixed;
+    // top: 10px;
+    left: 0;
+    width: 100%;
+    margin: 0 auto;
   }
   
 `;
@@ -36,7 +39,8 @@ const Nav = styled.nav`
   box-shadow: 0 0 100px rgba(0, 0, 0, 0.5);
   background-color: rgba(255, 255, 255, 0.2); 
   backdrop-filter: blur(5px); 
-  
+  width: 85%;
+  margin: 0 auto;
   @media (max-width: 768px) {
     border-radius: 0;
     width: 100%;
@@ -78,7 +82,7 @@ const Menu = styled.ul`
   justify-content: end;
   @media (max-width: 768px) {
     display: block;
-
+    transform: translate(0, -50px);
   }
 `;
 
@@ -131,7 +135,8 @@ const MobileMenuBackground = styled.div`
       background-size: cover; /* Imaginea acoperă întreaga suprafață */
       background-position: center; /* Imaginea este poziționată în centrul containerului */
       background-repeat: no-repeat; /* Imaginea nu este repetată */
-    `}
+      
+      `}
   }
 `;
 

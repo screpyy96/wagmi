@@ -216,11 +216,11 @@ const SendPayment = ({ address, isConnected, ethBalance, usdtBalance, usdcBalanc
           <BuyButton>Buy with crypto</BuyButton>
           <GetTokensButton>Get free tokens</GetTokensButton>
         </ButtonContainer>
-        </SpanModal>
+        </SpanModal> 
         <ProgressBar progress={progressPercentage} />
         <Price>
-        <p>Total Capital Raised: {totalCapitalRaised.toLocaleString('en-US', { maximumFractionDigits: 2 })} USD</p>
-          <p>Target: 200,000 USD</p>
+        <p>Raised: {totalCapitalRaised.toLocaleString('en-US', { maximumFractionDigits: 2 })} USD</p>
+          <p> 200,000 USD</p>
         </Price>
         {/* Meniu dropdown pentru selectarea monedei */}
         <SelectCurrency value={selectedCurrency} onChange={(e) => setSelectedCurrency(e.target.value)}>

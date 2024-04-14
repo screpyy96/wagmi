@@ -8,6 +8,7 @@ import Balanta from '../components/balanta'
 import Navbar from "../components/navbar/navbar"
 import Cards from '../components/Cards/Cards';
 import ShowText from "../components/ShowText/ShowText"
+import {MainWrapepr} from '../components/ShowText/ShowText.styled'
 
 export default function Home() {
   const [adresa, setAdresa] = useState(null);
@@ -18,7 +19,7 @@ export default function Home() {
 //   height: 150px; /* Ajustați înălțimea pentru a se potrivi cu înălțimea meniului */
 // `;
 const Content = styled.div`
-  height: 2000px; /* Doar pentru a crea spațiu pentru a face scrolling */
+  height: 200px; /* Doar pentru a crea spațiu pentru a face scrolling */
 `;
 
   useEffect(() => {
@@ -35,7 +36,9 @@ const Content = styled.div`
         {/* <Spacer/> */}
         <Balanta address={address}/>
         <Cards />
-        <ShowText />
+        <MainWrapepr>
+          <ShowText />
+        </MainWrapepr>
         <Content/>
       </div>
     );
