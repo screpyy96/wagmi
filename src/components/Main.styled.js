@@ -57,7 +57,6 @@ const Button = styled.button`
   background-color: #52B2A7; // green
   color: #fff;
   cursor: pointer;
-  margin-bottom: 10px;
   height: 50px;
   width: 80%;
 
@@ -179,7 +178,9 @@ const InfoContainer = styled.div`
   color: #fff;
 `;
 
-// Styled button pentru "Buy with crypto"
+// Styled button pentru 
+
+
 const BuyButton = styled.button`
   cursor: pointer;
   background-color: #52B2A7;
@@ -251,4 +252,36 @@ const PriceText = styled.p`
   width: 600px;
   text-align: center;
 `;
-export {PriceText,PriceLine,PriceContainer,Option,BuyButton, GetTokensButton, ButtonContainer,ConnectModal, SelectCurrency, Price,Container, Modal, Button, Input, InfoContainer, SpanModal, StyledText };
+
+const SocialMedia = styled.div`
+color: white;
+display: flex;
+justify-content: space-between;
+align-items: center;
+`
+const WaitlistBtn = styled.div`
+display: flex;
+align-items: center;
+justify-content: space-between;
+@media (max-width: 768px) {
+  width: 70%;
+  font-size: 16px;
+  margin: 0 auto;
+  display: flex;
+  grid-template-columns: 1fr;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+`
+const StyledIcon = styled.img`
+width: 40px;
+height: 40px;
+background: rgb(241,97,34);
+margin: 0 10px;
+border-radius: 20px;
+padding: 5px;
+`;
+
+export {StyledIcon,SocialMedia,WaitlistBtn,PriceText,PriceLine,PriceContainer,Option,BuyButton, GetTokensButton, ButtonContainer,ConnectModal, SelectCurrency, Price,Container, Modal, Button, Input, InfoContainer, SpanModal, StyledText };

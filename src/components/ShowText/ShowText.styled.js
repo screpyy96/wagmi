@@ -1,8 +1,9 @@
 import styled from 'styled-components';
 
 const MainWrapepr = styled.div`
-width: 89%;
+width: 80%;
 margin: 0 auto;
+
 `;
 
 // Stilizare pentru containerul principal
@@ -39,7 +40,7 @@ font-size: 20px;
 const HoverText = styled.div`
   width: 100%; /* Ajustează lățimea după necesități */
   color: white;
-  margin-left: 220px;
+  margin-left: 3rem;
   align-items: end;
   border-radius: 5px;
 box-shadow: 0 0 100px rgba(0, 0, 0, 0.5);
@@ -49,7 +50,6 @@ text-align: left;
 display: flex;
 justify-content: space-around;
 flex-direction: column;
-margin-left: 20px;
 
 & p {
   padding: 10px;

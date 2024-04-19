@@ -131,7 +131,7 @@ const MobileMenuBackground = styled.div`
     ${props => props.isopen && `
       z-index: 999;
       display: flex;
-      background-image: url("https://www.explorascoin.com/_next/static/media/background.ee28fc1e.jpeg");
+      background: black;
       background-size: cover; /* Imaginea acoperă întreaga suprafață */
       background-position: center; /* Imaginea este poziționată în centrul containerului */
       background-repeat: no-repeat; /* Imaginea nu este repetată */

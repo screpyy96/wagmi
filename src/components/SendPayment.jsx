@@ -1,16 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import { useWriteContract, useSendTransaction } from 'wagmi';
 import {  parseEther } from "viem";
-import usdtAbi from "../usdtAbi.json";
-import usdcAbi from "../usdcAbi.json";
+// import usdtAbi from "../usdtAbi.json";
+// import usdcAbi from "../usdcAbi.json";
+import styled from 'styled-components';
 import { collection, addDoc, getDocs, query, where } from "firebase/firestore";
+
 
 import firestore from '../config/firebase'
 import ProgressBar from './ProgressBar'
-import {PriceText,PriceLine,PriceContainer,Option,BuyButton, GetTokensButton, ButtonContainer, SelectCurrency, StyledText, Container, Modal, Button, InfoContainer, Input,SpanModal,Price } from './Main.styled'
+import {StyledIcon,SocialMedia,WaitlistBtn, PriceText,PriceLine,PriceContainer,Option,BuyButton, GetTokensButton, ButtonContainer, SelectCurrency, StyledText, Container, Modal, Button, InfoContainer, Input,SpanModal,Price } from './Main.styled'
 
-const usdtContractAddress = "0xdAC17F958D2ee523a2206206994597C13D831ec7";
-const usdcContractAddress = "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48";
+// const usdtContractAddress = "0xdAC17F958D2ee523a2206206994597C13D831ec7";
+// const usdcContractAddress = "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48";
 const receiverAddress = "0x140333B64962a30C837D31d219c9eef2F1CC3A85";
 const SendPayment = ({ address, isConnected, ethBalance, usdtBalance, usdcBalance }) => {
   
@@ -24,7 +26,8 @@ const SendPayment = ({ address, isConnected, ethBalance, usdtBalance, usdcBalanc
   const { sendTransaction } = useSendTransaction();
 
 
-  
+
+
   useEffect(() => {
     const fetchEthPrice = async () => {
       try {
@@ -97,36 +100,6 @@ const SendPayment = ({ address, isConnected, ethBalance, usdtBalance, usdcBalanc
   }, [firestore, address]);
   
 
-
-  // const handleTransfer = async () => {
-  //   try {
-  //     let currencyAmount = amount;
-  //     if(selectedCurrency === 'ETH') {
-  //       currencyAmount = parseEther(amount);
-  //     } else {
-  //       // const ethValue = dollars / ethPriceInDollars;
-
-  //       currencyAmount = amount  ; // Convert to USDT or USDC format
-  //     }
-  //     console.log(currencyAmount, "ceva")
-  //     await sendTransaction({
-  //       to: receiverAddress,
-  //       value: currencyAmount,
-  //     });
-
-  //     // Salvăm datele în Firebase, inclusiv tokenNumber-ul calculat
-  //     await addDoc(collection(firestore, 'adrese'), {
-  //       adresa: address,
-  //       data: new Date(),
-  //       moneda: selectedCurrency,
-  //       suma: amount,
-  //       tokenNumber: calculatePrice() // Adăugăm tokenNumber-ul calculat aici
-  //     });
-  //   } catch (error) {
-  //     console.error("Error sending transaction:", error);
-  //   }
-  // };
-
   const handleTransfer = async () => {
     try {
       let currencyAmount = amount;
@@ -198,10 +171,17 @@ const SendPayment = ({ address, isConnected, ethBalance, usdtBalance, usdcBalanc
       <span className="title" style={{fontSize: '30px'}}>Exploras Coin & Solutions <br/>
       <span className="highlight">AI-Powered Knowledge Discovery </span></span><br/><br/>
       The trajectory of Exploras Coin is akin to a finely tuned compass, guiding us through the ever-changing currents of the cryptocurrency landscape. 
-      Our journey begins with a concerted effort to establish Exploras Coin as a beacon of innovation and reliability within the expansive crypto community. 
-       <br/>
+      <br/>
       Embark on a voyage with <span className="highlight"> Exploras: </span>let your data ignite the spark of revolutionary discoveries.
     </StyledText>
+    <WaitlistBtn>
+      <Button style={{width: "60%"}}>Join Waitlist</Button>
+      <SocialMedia>
+            <StyledIcon src="../../../discord.svg" alt="Discord Icon" />
+            <StyledIcon src="../../../telegram.svg" alt="Telegram Icon" />
+            <StyledIcon src="../../../x.svg" alt="Twitter Icon" />
+      </SocialMedia>
+    </WaitlistBtn>
       </div>
 
        <Modal> 

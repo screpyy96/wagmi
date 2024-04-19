@@ -9,6 +9,7 @@ import Navbar from "../components/navbar/navbar"
 import Cards from '../components/Cards/Cards';
 import ShowText from "../components/ShowText/ShowText"
 import {MainWrapepr} from '../components/ShowText/ShowText.styled'
+import Exploras from "../components/Exploras/Exploras"
 
 export default function Home() {
   const [adresa, setAdresa] = useState(null);
@@ -39,6 +40,7 @@ const Content = styled.div`
         <MainWrapepr>
           <ShowText />
         </MainWrapepr>
+        <Exploras/>
         <Content/>
       </div>
     );
