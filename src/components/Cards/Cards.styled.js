@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import Image from 'next/image';
 
 const MainContainer = styled.div`
 display: grid;
@@ -35,13 +36,12 @@ border-radius: 10px;
   }
 `;
 
-const CardImg = styled.img`
+const CardImg = styled(Image)`
   /* Dimensiuni */
   width: 70%; /* Lățimea imaginii */
   height: auto; /* Înălțimea se ajustează automat pentru a păstra proporțiile */
 
   /* Margini și padding */
-//   margin: 20px; /* Elimină marginile implicite */
   padding: 20px; /* Elimină padding-ul implicite */
 
   /* Bază */

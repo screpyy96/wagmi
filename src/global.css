@@ -12,11 +12,9 @@
 
 
 body, html {
-    background: black;
-    background-position: center; /* Adjust as needed */
-    background-repeat: no-repeat; /* Adjust as needed */
+    background: black; 
+
     font-family: "Roboto", sans-serif;
-    margin: 0;
-    padding: 0;
+
 }
 

@@ -166,7 +166,10 @@ const SendPayment = ({ address, isConnected, ethBalance, usdtBalance, usdcBalanc
 
   return (
     <Container>
-      <div>
+      <div style={{height: "100%",
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "space-around"}}>
       <StyledText>
       <span className="title" style={{fontSize: '30px'}}>Exploras Coin & Solutions <br/>
       <span className="highlight">AI-Powered Knowledge Discovery </span></span><br/>
@@ -177,10 +180,10 @@ const SendPayment = ({ address, isConnected, ethBalance, usdtBalance, usdcBalanc
     <WaitlistBtn>
       <Button style={{width: "60%"}}>Join Waitlist</Button>
       <SocialMedia>
-            <StyledIcon src="../../../discord.svg" alt="Discord Icon" />
-            <StyledIcon src="../../../telegram.svg" alt="Telegram Icon" />
-            <StyledIcon src="../../../x.svg" alt="Twitter Icon" />
-      </SocialMedia>
+  <StyledIcon src="/discord.svg" alt="Discord Icon" width={40} height={40} />
+  <StyledIcon src="/telegram.svg" alt="Telegram Icon" width={40} height={40} />
+  <StyledIcon src="/x.svg" alt="Twitter Icon" width={40} height={40} />
+</SocialMedia>
     </WaitlistBtn>
       </div>
 

@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import ethIcon from '../../public/coin.svg';
 import usdtIcon from '../../public/coin.svg';
 import usdcIcon from '../../public/coin.svg';
+import Image from 'next/image';
 
 const Container = styled.div`
   display: grid;
@@ -288,10 +289,11 @@ margin-top: 1rem;
 }
 
 `
-const StyledIcon = styled.img`
-width: 40px;
-height: 40px;
-background: rgb(241,97,34);
+const StyledIcon = styled(Image)`
+  width: 40px; /* Setează lățimea iconului */
+  height: 40px; /* Setează înălțimea iconului */
+  margin-right: 10px; /* Adaugă spațiu între iconuri */
+  background: rgb(241,97,34);
 margin: 0 10px;
 border-radius: 20px;
 padding: 5px;

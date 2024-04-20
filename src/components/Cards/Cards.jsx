@@ -6,7 +6,7 @@ import { CardContainer, MainContainer, CardImg,Title,Description,MainTitle } fro
 const ExplorasSwap = () => {
   return (
     <CardContainer>
-        <CardImg src="../../../ex.png" alt="logo"/>
+        <CardImg src="/ex.png" alt="logo" width={100} height={100} />
        {/* <Title>Book your next trip with Exploras</Title> */}
         {/* Titlul */}
         {/* Subtitlul */}
@@ -19,7 +19,7 @@ const ExplorasSolutions = () => {
     return (
       <CardContainer>
         {/* Imaginea pentru logo */}
-        <CardImg src="../../../ex.png" alt="logo"/>
+        <CardImg src="/ex.png" alt="logo" width={100} height={100} />
         {/* <Title>Book your next trip with Exploras</Title> */}
         {/* Titlul */}
         {/* Subtitlul */}
@@ -31,7 +31,7 @@ const ExplorasSolutions = () => {
   const CryptoVoyager = () => {
     return (
       <CardContainer>
-        <CardImg src="../../../card2.png" alt="logo"/>
+        <CardImg src="/card2.png" alt="logo" width={100} height={100} />
         {/* <Title>Voyager Card</Title> */}
         {/* Titlul */}
         {/* Subtitlul */}
