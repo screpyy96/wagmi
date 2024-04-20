@@ -1,11 +1,10 @@
-"use client";
+
 import { StyleSheetManager } from 'styled-components';
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { AiOutlineMenu, AiOutlineClose } from "react-icons/ai";
 import {
   Header,
   Nav,
-  Logo,
   Menu,
   MenuItem,
   MobileMenuIcon,
@@ -14,6 +13,7 @@ import {
   StyledLink
 } from "./Navbar.styled";
 import Connect from '../Connect';
+import Image from 'next/image';
 
 const Navbar = () => {
   const [menuIcon, setMenuIcon] = useState(false);
@@ -24,14 +24,15 @@ const Navbar = () => {
 
 
   return (
+    <StyleSheetManager shouldForwardProp={prop => prop !== 'isopen'}>
+
+   
     <Header >
       
         <Nav  >
-        <div>
             <StyledLink href="/" passHref>
-              <Logo src="../../../white.svg" alt="logo"/>
+            <Image src="/white.svg" alt="logo" width={70} height={70} />
             </StyledLink>
-          </div>
           <Menu>
             <MenuItem>
               <StyledLink href="/" passHref>
@@ -51,7 +52,7 @@ const Navbar = () => {
             </MenuItem>
 
             <MenuItem>
-              <StyledLink href="/pages/how-to-buy" passHref>
+            <StyledLink href="/how-to-buy" passHref>
                 How To Buy
               </StyledLink>
             </MenuItem>
@@ -79,7 +80,7 @@ const Navbar = () => {
                 </div>
             )}
           </MobileMenuIcon>
-          <StyleSheetManager shouldForwardProp={prop => prop !== 'isopen'}>
+          
           <MobileMenuBackground isopen={+menuIcon}>
             
             
@@ -105,7 +106,7 @@ const Navbar = () => {
                 </StyledLink>
               </MobileMenuItem>
               <MobileMenuItem onClick={handleSmallerScreensNavigation}>
-                <StyledLink href="/pages/how-to-buy" passHref>
+                <StyledLink href="/how-to-buy" passHref>
                   How To Buy
                 </StyledLink>
               </MobileMenuItem>
@@ -118,9 +119,10 @@ const Navbar = () => {
              
             </Menu>
           </MobileMenuBackground>
-          </StyleSheetManager>
+          
         </Nav>
     </Header>
+     </StyleSheetManager>
   );
 };
 

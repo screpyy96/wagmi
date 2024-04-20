@@ -1,5 +1,5 @@
 // Stilurile pentru componenta de antet (header)
-import styled, {css, keyframes } from "styled-components";
+import styled from "styled-components";
 
 import Link from 'next/link';
 
@@ -48,22 +48,11 @@ const Nav = styled.nav`
 `;
 
 
-const colorChange = keyframes`
-  0% {
-    filter: hue-rotate(0deg); /* Se roteste la 0 grade */
-  }
-  100% {
-    filter: hue-rotate(360deg); /* Se roteste la 360 de grade */
-  }
-`;
-
 // Stilurile pentru logo
 const Logo = styled.img`
   height: 100px;
   width: 100px;
-  text-transform: uppercase;
   cursor: pointer;
-  // animation: ${colorChange} 5s linear infinite; /* Aplicăm animația de schimbare a culorii */
 padding: 20px;
   @media (max-width: 768px) {
     height: 80px;
@@ -140,8 +129,6 @@ const MobileMenuBackground = styled.div`
   }
 `;
 
-export default MobileMenuBackground;
-
 
 // Stilurile pentru elementele de meniu mobil
 const MobileMenuItem = styled.li`
@@ -177,24 +164,16 @@ const Button = styled.button`
 
 
 
-// Componenta pentru butonul de disconnect sau connect
-const WalletButton = styled.div`
-  ${props => props.mobileHidden && mobileMediaQuery} // Aplicăm Media Query-ul dacă prop-ul mobileHidden este setat
 
-  // Stiluri pentru buton
-  // background-color: #ceff00;
-  color: #2c3e50;
-  border: none;
-  border-radius: 999px;
-  padding: 0.5rem 2rem;
-  font-weight: bold;
-  text-transform: uppercase;
-  cursor: pointer;
-
-  &:hover {
-    color: #ceff00;
-  }
-`;
-
-
-export {StyledLink, Header, Nav, Logo, Menu, MenuItem, MobileMenuIcon, MobileMenuBackground, MobileMenuItem, Button,WalletButton }
+export {
+  StyledLink,
+  Header,
+  Nav,
+  Logo,
+  Menu,
+  MenuItem,
+  MobileMenuIcon,
+  MobileMenuBackground,
+  MobileMenuItem,
+  Button
+};

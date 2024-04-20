@@ -1,44 +1,50 @@
 "use client"
-
-import React, { useEffect, useState } from 'react';
-import styled from 'styled-components';
 import { useWeb3Modal } from "@web3modal/wagmi/react";
 import { useAccount } from "wagmi";
-import Balanta from '../components/balanta'
+import { useBalance } from 'wagmi';
+import SendPayment from '../components/SendPayment';
 import Navbar from "../components/navbar/navbar"
 import Cards from '../components/Cards/Cards';
 import ShowText from "../components/ShowText/ShowText"
 import Exploras from "../components/Exploras/Exploras"
 
 export default function Home() {
-  const [adresa, setAdresa] = useState(null);
   const { open } = useWeb3Modal();
-  const { isConnected, address } = useAccount();
+  const { address } = useAccount();
 
-//    const Spacer = styled.div`
-//   height: 150px; /* Ajustați înălțimea pentru a se potrivi cu înălțimea meniului */
-// `;
-const Content = styled.div`
-  height: 200px; /* Doar pentru a crea spațiu pentru a face scrolling */
-`;
+  const usdtContractAddress = '0xdac17f958d2ee523a2206206994597c13d831ec7';
+  // Adresa contractului USDC
+  const usdcContractAddress = '0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48';
+  // Balanța pentru ETH
+  const ethBalance = useBalance({
+    address: address,
+    currency: 'ETH',
+  });
+  // Balanța pentru USDT
+  const usdtBalance = useBalance({
+    address,
+    token: usdtContractAddress, 
+  });
 
-  useEffect(() => {
-    if (!isConnected) {
-      console.log("open");
-    } else {
-      setAdresa(address)
-    }
-  }, [isConnected, open, address]);
-  
-    return (
-      <>
-        <Navbar address={address}/>
-        <Balanta address={address}/>
-        <Cards />
+  // Balanța pentru USDC
+  const usdcBalance = useBalance({
+    address,
+    token: usdcContractAddress, 
+  });
 
-          <ShowText />
-        <Exploras/>
-        <Content/>
-      </>
-    );
-  };
+  return (
+    <>
+      <Navbar/>
+      <SendPayment 
+        address={address} 
+        ethBalance={ethBalance}
+        usdtBalance={usdtBalance}
+        usdcBalance={usdcBalance}
+        />
+
+      <Cards />
+      <ShowText />
+      <Exploras/>
+    </>
+  );
+}

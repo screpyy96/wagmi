@@ -12,17 +12,7 @@ const metadata = {
 };
 
 export default function RootLayout({ children }) {
-  const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    // Ascunde spinner-ul după 2 secunde
-    const timer = setTimeout(() => {
-      setLoading(false);
-    }, 1000);
-
-    // Curăță timer-ul când componenta este dezmontată sau atunci când loading devine false
-    return () => clearTimeout(timer);
-  }, []);
 
   return (
     <html lang="en">

@@ -11,7 +11,6 @@
   },
   "dependencies": {
     "@ethersproject/units": "^5.7.0",
-    "@tanstack/react-query": "5.18.1",
     "@web3modal/wagmi": "4.0.0",
     "firebase": "^10.10.0",
     "next": "14.0.4",
@@ -23,10 +22,12 @@
     "wagmi": "2.5.6"
   },
   "devDependencies": {
+    "@babel/plugin-transform-private-methods": "^7.24.1",
     "@biomejs/biome": "1.5.2",
     "@types/node": "20.11.4",
     "@types/react": "18.2.14",
     "@types/react-dom": "18.2.6",
+    "babel-plugin-styled-components": "^2.1.4",
     "eslint": "8.44.0",
     "eslint-config-next": "14.0.4"
   }
