@@ -62,6 +62,7 @@ const Button = styled.button`
 
 
   @media (max-width: 768px) {
+    margin: 2rem;
     max-width: 100vw; /* Ajustarea lățimii butonului pentru a ocupa întreaga lățime a ecranului */
   }
 `;
@@ -99,7 +100,9 @@ const SpanModal = styled.div`
     margin: 10px;
     cursor: pointer;
     @media (max-width: 768px) {
-padding: 12px;
+padding:  10px 0;
+
+margin: 0;
     }
   }
 `;
@@ -116,12 +119,17 @@ const StyledText = styled.p`
   .highlight {
     color: #ff6600;
     font-weight: bold;
+    @media (max-width: 768px) {
+
+    font-size: 18px;
+  }
   }
 
   @media (max-width: 768px) {
     max-width: 90vw;; /* Ajustarea lățimii maxime a textului pe dispozitivele mobile */
     margin: 0 auto; /* Centrarea textului pe ecranele mai mici */
     margin-bottom: 1rem;
+    font-size: 18px;
   }
 `;
 
@@ -157,7 +165,7 @@ const Option = styled.option`
 const Price = styled.div`
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
   color: #fff;
   width: 100%;
   padding: 20px;
@@ -174,8 +182,12 @@ const InfoContainer = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin-top: 20px;
   color: #fff;
+    @media (max-width: 768px) {
+    width: 90%;
+    padding: 1rem;
+
+}
 `;
 
 // Styled button pentru 
@@ -187,14 +199,14 @@ const BuyButton = styled.button`
   color: #fff;
   font-weight: bold;
   border: none;
-  border-radius: 1rem;
+
   border-color: #52B2A7;
   border: 0;
   width:100%;
 
     @media (max-width: 768px) {
-    max-width: 90vw; /* Ajustarea lățimii maxime a textului pe dispozitivele mobile */
-    padding: 12px;
+    ; /* Ajustarea lățimii maxime a textului pe dispozitivele mobile */
+
   }
 `;
 
@@ -203,9 +215,9 @@ const GetTokensButton = styled.button`
   cursor: pointer;
   background-color: transparent; /* Background transparent */
   color: #007bff; /* Culoarea textului */
-  border: 1px solid #007bff; /* Border cu culoarea textului */
-  border-radius: 7px;
-  padding: 10px;
+  border: 2px solid #007bff; /* Border cu culoarea textului */
+  border-radius: 5px;
+  // padding: 10px;
   width: 100%;
   &:hover {
     background: white;
@@ -219,7 +231,7 @@ const ButtonContainer = styled.div`
   display: flex;
   width: 100%;
     @media (max-width: 768px) {
-    max-width: 100vw; /* Ajustarea lățimii maxime a textului pe dispozitivele mobile */
+   
      
   }
 `;
@@ -263,6 +275,7 @@ const WaitlistBtn = styled.div`
 display: flex;
 align-items: center;
 justify-content: space-between;
+margin-top: 1rem;
 @media (max-width: 768px) {
   width: 70%;
   font-size: 16px;
@@ -283,5 +296,6 @@ margin: 0 10px;
 border-radius: 20px;
 padding: 5px;
 `;
+
 
 export {StyledIcon,SocialMedia,WaitlistBtn,PriceText,PriceLine,PriceContainer,Option,BuyButton, GetTokensButton, ButtonContainer,ConnectModal, SelectCurrency, Price,Container, Modal, Button, Input, InfoContainer, SpanModal, StyledText };

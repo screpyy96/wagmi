@@ -8,7 +8,6 @@ import Balanta from '../components/balanta'
 import Navbar from "../components/navbar/navbar"
 import Cards from '../components/Cards/Cards';
 import ShowText from "../components/ShowText/ShowText"
-import {MainWrapepr} from '../components/ShowText/ShowText.styled'
 import Exploras from "../components/Exploras/Exploras"
 
 export default function Home() {
@@ -32,16 +31,14 @@ const Content = styled.div`
   }, [isConnected, open, address]);
   
     return (
-      <div>
+      <>
         <Navbar address={address}/>
-        {/* <Spacer/> */}
         <Balanta address={address}/>
         <Cards />
-        <MainWrapepr>
+
           <ShowText />
-        </MainWrapepr>
         <Exploras/>
         <Content/>
-      </div>
+      </>
     );
   };

@@ -3,10 +3,10 @@ import styled from 'styled-components';
 const MainContainer = styled.div`
 display: grid;
 grid-template-columns: repeat(3, 1fr); /* 3 columns with equal width */
-gap: 20px; /* Spacing between grid items */
 border-radius: 10px;
-margin-top: 70px;
 padding: 20px;
+width: 90%;
+margin: 2rem auto;
 @media (max-width: 768px) {
   
   width: 100%;
@@ -18,18 +18,21 @@ padding: 20px;
 `
 const CardContainer = styled.div`
 color: white;
-width: 80%;
+width: 90%;
 margin: 0 auto;
 display: flex;
-flex-direction: column;
+flex-direction: row;
 align-items: center;
 justify-content: start;
-padding: 20px;
 border-radius: 10px;
 border-radius: 10px;
   box-shadow: 0 0 100px rgba(0, 0, 0, 0.5);
   background-color: rgba(255, 255, 255, 0.2); /* Setăm culoarea de fundal la alb semi-transparent */
   backdrop-filter: blur(5px); /* Adăugăm un efect de blur */
+  @media (max-width: 768px) {
+    width:90%;
+    margin: 0 auto;
+  }
 `;
 
 const CardImg = styled.img`
@@ -44,6 +47,10 @@ const CardImg = styled.img`
   /* Bază */
   display: block; /* Face imaginea să fie element de tip bloc */
   border-radius: 8px; /* Rotunjirea colțurilor imaginii */
+  @media (max-width: 768px) {
+    width: 40%; /* Lățimea imaginii */
+    height: auto; /* Înălțimea se ajustează automat pentru a păstra proporțiile */
+  }
 `;
 
 // Stilizare pentru titlu

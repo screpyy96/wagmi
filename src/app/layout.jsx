@@ -4,7 +4,6 @@ import React, { useState, useEffect } from 'react';
 import ContextProvider from '../context';
 import { config } from '../config';
 import "../global.css";
-import LoadingSpinner from '../components/LoadingSpinner';
 
 // Definim metadatele ca o constantă în afara componentei
 const metadata = {
@@ -28,11 +27,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body>
-        {loading ? (
-          <LoadingSpinner /> // Afiseaza spinner-ul de incarcare
-        ) : (
           <ContextProvider initialState={config}>{children}</ContextProvider>
-        )}
       </body>
     </html>
   );

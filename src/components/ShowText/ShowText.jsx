@@ -51,7 +51,7 @@ const handleMouseEnter = (text) => {
         return (
           
                 <>
-                  <h2 style={{color: "white", marginTop: "50px", textAlign: "center", padding: "20px"}}>Showed in</h2>
+                  <h2 style={{color: "white", textAlign: "center", padding: "20px"}}>Showed in</h2>
                 <Wrapper>
                   <Container>
                     {/* Generarea butoanelor */}

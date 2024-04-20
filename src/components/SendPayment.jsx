@@ -169,7 +169,7 @@ const SendPayment = ({ address, isConnected, ethBalance, usdtBalance, usdcBalanc
       <div>
       <StyledText>
       <span className="title" style={{fontSize: '30px'}}>Exploras Coin & Solutions <br/>
-      <span className="highlight">AI-Powered Knowledge Discovery </span></span><br/><br/>
+      <span className="highlight">AI-Powered Knowledge Discovery </span></span><br/>
       The trajectory of Exploras Coin is akin to a finely tuned compass, guiding us through the ever-changing currents of the cryptocurrency landscape. 
       <br/>
       Embark on a voyage with <span className="highlight"> Exploras: </span>let your data ignite the spark of revolutionary discoveries.
@@ -199,8 +199,8 @@ const SendPayment = ({ address, isConnected, ethBalance, usdtBalance, usdcBalanc
         </SpanModal> 
         <ProgressBar progress={progressPercentage} />
         <Price>
-        <p>Raised: {totalCapitalRaised.toLocaleString('en-US', { maximumFractionDigits: 2 })} USD</p>
-          <p> 200,000 USD</p>
+        <p>USD Raised: {totalCapitalRaised.toLocaleString('en-US', { maximumFractionDigits: 2 })}/200.000</p>
+          
         </Price>
         {/* Meniu dropdown pentru selectarea monedei */}
         <SelectCurrency value={selectedCurrency} onChange={(e) => setSelectedCurrency(e.target.value)}>

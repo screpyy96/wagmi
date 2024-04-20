@@ -1,17 +1,12 @@
 import styled from 'styled-components';
 
-const MainWrapepr = styled.div`
-width: 80%;
-margin: 0 auto;
 
-`;
 
 // Stilizare pentru containerul principal
 const Container = styled.div`
 display: grid; /* Permite butoanelor să treacă pe rândul următor */
 grid-template-columns: 1fr 1fr;
 height: 100%;
-width: 100%;
 grid-gap: 1rem;
 @media (max-width: 768px) {
 
@@ -38,9 +33,7 @@ font-size: 20px;
 `;
 
 const HoverText = styled.div`
-  width: 100%; /* Ajustează lățimea după necesități */
   color: white;
-  margin-left: 3rem;
   align-items: end;
   border-radius: 5px;
 box-shadow: 0 0 100px rgba(0, 0, 0, 0.5);
@@ -105,10 +98,10 @@ justify-content: center;
 
 const Wrapper = styled.div`
 display: grid;
+  grid-template-columns: 40% 60%;
+  gap: 1rem;
   width: 80%;
   margin: 0 auto;
-  grid-template-columns: 30% 70%;
-  gap: 2rem;
 @media (max-width: 768px) {
     display: block;
     width: 90%;
@@ -139,5 +132,4 @@ export {
     Button,
     Wrapper,
     ResponsiveImage,
-    MainWrapepr
 }
