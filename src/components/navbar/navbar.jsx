@@ -41,12 +41,12 @@ const Navbar = () => {
             </MenuItem>
             
             <MenuItem>
-              <StyledLink href="/pages/stacking" passHref>
+              <StyledLink href="/stacking" passHref>
                 Staking
               </StyledLink>
             </MenuItem>
             <MenuItem>
-              <StyledLink href="/pages/roadmap" passHref>
+              <StyledLink href="/roadmap" passHref>
                 Roadmap
               </StyledLink>
             </MenuItem>
@@ -96,12 +96,12 @@ const Navbar = () => {
                 </StyledLink>
               </MobileMenuItem>
               <MobileMenuItem onClick={handleSmallerScreensNavigation}>
-                <StyledLink href="/pages/how-to-buy" passHref>
+                <StyledLink href="/how-to-buy" passHref>
                   Staking
                 </StyledLink>
               </MobileMenuItem>
               <MobileMenuItem onClick={handleSmallerScreensNavigation}>
-                <StyledLink href="/pages/how-to-buy" passHref>
+                <StyledLink href="/how-to-buy" passHref>
                   Roadmap
                 </StyledLink>
               </MobileMenuItem>

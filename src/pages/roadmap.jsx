@@ -1,6 +1,6 @@
 import Navbar from "../components/navbar/navbar";
 import "../global.css"
-const HowToBuy = () => {
+const Roadmap = () => {
     return (
         <div>
             <Navbar/>
@@ -8,4 +8,4 @@ const HowToBuy = () => {
     )
 }
 
-export default HowToBuy;
+export default Roadmap;
