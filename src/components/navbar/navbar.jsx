@@ -69,9 +69,7 @@ const Navbar = () => {
 
           
           <MobileMenuIcon onClick={handleSmallerScreensNavigation}>
-          <MenuItem >
-                      <Connect/>
-                      </MenuItem>
+         
             {menuIcon ? (
                   <AiOutlineClose size={25} />
             ) : (

@@ -1,4 +1,5 @@
 
+import Navbar from '../components/navbar/navbar';
 import Web3ModalProvider from '../context/index'; // Ajustează calea conform structurii proiectului tău
 
 function MyApp({ Component, pageProps }) {
@@ -6,7 +7,10 @@ function MyApp({ Component, pageProps }) {
     
     return (
       <Web3ModalProvider>
-        <Component {...pageProps} />
+        <Component {...pageProps}>
+        <Navbar/>
+        </Component>
+       
       </Web3ModalProvider>
     );
   }

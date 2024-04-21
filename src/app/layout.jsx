@@ -1,6 +1,6 @@
 // ./src/app/layout.tsx
 "use client"
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import ContextProvider from '../context';
 import { config } from '../config';
 import "../global.css";
@@ -17,7 +17,8 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body>
-          <ContextProvider initialState={config}>{children}</ContextProvider>
+          <ContextProvider initialState={config}>
+            {children}</ContextProvider>
       </body>
     </html>
   );
