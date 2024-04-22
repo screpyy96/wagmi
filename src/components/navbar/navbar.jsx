@@ -31,7 +31,7 @@ const Navbar = () => {
       
         <Nav  >
             <StyledLink href="/" passHref>
-            <Image src="/test.png" alt="logo" width={70} height={70} />
+            <Image src="/white.svg" alt="logo" width={70} height={70} />
             </StyledLink>
           <Menu>
             <MenuItem>

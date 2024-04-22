@@ -1,11 +1,13 @@
-import Cards from "../components/Cards/Cards";
+import FaqPage from "../components/faq";
 import Navbar from "../components/navbar/navbar";
+import Timeline from "../components/roadmap/roadmap";
 import "../global.css"
 const Roadmap = () => {
     return (
         <div>
             <Navbar/>
-            <Cards/>
+            <Timeline/>
+            <FaqPage/>
         </div>
     )
 }

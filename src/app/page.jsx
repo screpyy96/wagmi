@@ -7,6 +7,7 @@ import Navbar from "../components/navbar/navbar"
 import Cards from '../components/Cards/Cards';
 import ShowText from "../components/ShowText/ShowText"
 import Exploras from "../components/Exploras/Exploras"
+import Timeline from "../components/roadmap/roadmap";
 
 export default function Home() {
   const { open } = useWeb3Modal();
@@ -45,6 +46,7 @@ export default function Home() {
       <Cards />
       <ShowText />
       <Exploras/>
+
     </>
   );
 }
